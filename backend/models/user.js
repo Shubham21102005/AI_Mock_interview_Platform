@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema(
         ref: "Session",
       },
     ],
+    refreshToken: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

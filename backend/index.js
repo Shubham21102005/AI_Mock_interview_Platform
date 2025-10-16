@@ -2,12 +2,15 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/connectDB.js");
-
+const authRoutes = require("./routes/authRoutes.js");
 const app = express();
 dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+
+//Routes
+app.use("/api/auth", authRoutes);
 
 app.listen(process.env.PORT, async () => {
   try {
