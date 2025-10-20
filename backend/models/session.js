@@ -1,5 +1,23 @@
-// models/sessionModel.js
 const mongoose = require("mongoose");
+
+const messageSchema = new mongoose.Schema(
+  {
+    role: {
+      type: String,
+      enum: ["user", "assistant", "system"],
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    timestamp: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { _id: false }
+);
 
 const sessionSchema = new mongoose.Schema(
   {
@@ -17,17 +35,25 @@ const sessionSchema = new mongoose.Schema(
       enum: ["pending", "in-progress", "completed"],
       default: "pending",
     },
+
+    // 🧠 New field for storing conversation history
+    conversation: [messageSchema],
+
     feedback: {
-      overall: { type: String }, // overall summary ("Good communication, needs more depth in technical answers")
-      strengths: [{ type: String }], // list of strong points
-      weaknesses: [{ type: String }], // list of improvement areas
-      rating: { type: Number }, // numeric rating (1–5 or 1–10)
-      suggestions: { type: String }, // detailed actionable advice
+      overall: { type: String },
+      strengths: [{ type: String }],
+      weaknesses: [{ type: String }],
+      rating: { type: Number },
+      suggestions: { type: String },
+    },
+
+    currentQuestionCount: {
+      type: Number,
+      default: 0, // helps track when to end interview
     },
   },
   { timestamps: true }
 );
 
 const Session = mongoose.model("Session", sessionSchema);
-
 module.exports = Session;

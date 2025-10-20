@@ -11,6 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google/genai": "^1.25.0",
+    "@langchain/google-genai": "^0.2.18",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
     "cors": "^2.8.5",
