@@ -22,7 +22,7 @@ function extractOutput(apiResponse) {
 /**
  * Simple heuristic: end after maxQuestions assistant messages
  */
-function shouldEndInterview(conversation = [], maxQuestions = 15) {
+function shouldEndInterview(conversation = [], maxQuestions = 25) {
   const questionCount = (conversation || []).filter(
     (m) => m.role === "assistant"
   ).length;
