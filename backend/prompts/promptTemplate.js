@@ -68,6 +68,10 @@ Your task:
 - Understand what was discussed last.
 - Generate the next logical question to continue the flow.
 - The tone should remain polite, human-like, and professional.
+- if the same topic has been discussed multiple times, pivot to a new relevant topic.
+- after 2-3 questions on a topic, move on to another area.
+- always ask questions related to DSA such as leetcode problems, algorithms, time and space complexity, etc.
+
 
 Example:
 If the candidate mentioned React hooks, follow up with:
