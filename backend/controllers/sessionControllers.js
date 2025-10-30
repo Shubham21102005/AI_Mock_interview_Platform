@@ -19,8 +19,21 @@ const createSession = async (req, res) => {
         .status(400)
         .json({ message: "Resume and Job Details are required" });
     }
+
+    // ensure user is authenticated
+    const userId = req.user?.userId;
+    if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
     const newSession = new Session({ resume, jobDetails });
     await newSession.save();
+
+    // link session to user
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    user.sessions = user.sessions || [];
+    user.sessions.push(newSession._id);
+    await user.save();
+
     res.status(201).json({
       message: "Session created successfully",
       sessionId: newSession._id,
@@ -69,7 +82,7 @@ const getAllSessions = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const sessions = await Session.find({ _id: { $in: user.sessions } });
+    const sessions = await Session.find({ _id: { $in: user.sessions || [] } });
     res.status(200).json(sessions);
   } catch (error) {
     console.error("getAllSessions error:", error);
@@ -80,8 +93,15 @@ const getAllSessions = async (req, res) => {
 const deleteSession = async (req, res) => {
   try {
     const { sessionid } = req.params;
+    const userId = req.user?.userId;
+    if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
     const session = await Session.findByIdAndDelete(sessionid);
     if (!session) return res.status(404).json({ message: "Session not found" });
+
+    // remove reference from user's sessions
+    await User.findByIdAndUpdate(userId, { $pull: { sessions: session._id } });
+
     res.status(200).json({ message: "Session deleted successfully" });
   } catch (error) {
     console.error("deleteSession error:", error);
