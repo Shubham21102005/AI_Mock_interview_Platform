@@ -361,7 +361,12 @@ export default function InterviewPage({ params }: { params: Promise<{ sessionId:
           { role: "assistant", content: "Interview completed. Thank you for your time!" },
           { role: "system", content: `Overall Feedback: ${result.feedback.overall || ""}` },
         ]);
-        speak("The interview is completed. Thank you for your time.");
+        speak("The interview is completed. Thank you for your time. Redirecting to feedback page...", () => {
+          // Redirect to feedback page after speech ends
+          setTimeout(() => {
+            router.push(`/feedback/${sessionId}`);
+          }, 1000);
+        });
         setJoined(false);
         return;
       }

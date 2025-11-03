@@ -270,7 +270,7 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center space-x-4">
               {user && (
-                <div className="flex items-center space-x-3">
+                <Link href="/profile" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
                   {user.profilePicture ? (
                     <img
                       src={user.profilePicture}
@@ -285,7 +285,7 @@ export default function Dashboard() {
                     </div>
                   )}
                   <span className="text-gray-300 font-light">{user.name}</span>
-                </div>
+                </Link>
               )}
               <button
                 onClick={handleLogout}
@@ -621,10 +621,10 @@ export default function Dashboard() {
                         )}
                         {session.status === "completed" && (
                           <Link
-                            href={`/interview/${session._id}`}
+                            href={`/feedback/${session._id}`}
                             className="px-6 py-3 bg-white text-black hover:bg-gray-100 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 border-2 border-white"
                           >
-                            View Results
+                            View Feedback
                           </Link>
                         )}
                         <button
