@@ -573,7 +573,7 @@ export default function InterviewPage({ params }: { params: Promise<{ sessionId:
           </div>
 
           {/* Transcript Sidebar */}
-          <div className="h-[600px] lg:h-auto">
+          <div className="h-[600px] lg:h-[calc(100vh-8rem)]">
             <TranscriptPanel conversation={conversation} interim={interim} processing={processing} />
           </div>
         </div>
