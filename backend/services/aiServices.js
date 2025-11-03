@@ -20,13 +20,40 @@ function extractOutput(apiResponse) {
 }
 
 /**
- * Simple heuristic: end after maxQuestions assistant messages
+ * Improved heuristic: end interview based on question count and topic coverage
+ * This serves as a safety net if the AI doesn't end the interview autonomously
  */
-function shouldEndInterview(conversation = [], maxQuestions = 25) {
+function shouldEndInterview(conversation = [], maxQuestions = 15) {
   const questionCount = (conversation || []).filter(
     (m) => m.role === "assistant"
   ).length;
-  return questionCount >= maxQuestions;
+
+  // Hard stop at maxQuestions (default 15)
+  if (questionCount >= maxQuestions) {
+    return true;
+  }
+
+  // Soft threshold: after 10 questions, check if key topics are covered
+  if (questionCount >= 10) {
+    const conversationText = conversation
+      .map((m) => m.content.toLowerCase())
+      .join(" ");
+
+    // Check for diverse topic coverage
+    const hasTechnical = /react|javascript|python|java|framework|library|code|develop/i.test(conversationText);
+    const hasDSA = /algorithm|complexity|data structure|leetcode|optimize|time complexity|space complexity/i.test(conversationText);
+    const hasBehavioral = /team|project|challenge|conflict|experience|situation|leadership/i.test(conversationText);
+
+    // If we have reasonable coverage after 10 questions, allow AI to continue but suggest ending
+    const topicsCovered = [hasTechnical, hasDSA, hasBehavioral].filter(Boolean).length;
+
+    // If 12+ questions and at least 2 topic areas covered, strongly suggest ending
+    if (questionCount >= 12 && topicsCovered >= 2) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 async function generateNextQuestion({ resume, jobDetails, conversation }) {
