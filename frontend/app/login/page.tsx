@@ -124,7 +124,7 @@ export default function Login() {
         <div className="text-center">
           <div className="flex justify-center mb-6">
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-white/10 to-white/5 rounded-2xl blur-sm opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+              <div className="absolute -inset-1 bg-linear-to-r from-white/10 to-white/5 rounded-2xl blur-sm opacity-0 group-hover:opacity-100 transition duration-1000"></div>
               <div className="relative flex items-center space-x-3 bg-black border border-gray-800 px-6 py-4 rounded-2xl backdrop-blur-sm">
                 <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
                   <svg
@@ -203,7 +203,7 @@ export default function Login() {
                   } rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all duration-500 backdrop-blur-sm font-light`}
                   placeholder="Enter your email"
                 />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </div>
               {errors.email && (
                 <p className="mt-2 text-sm text-red-400 flex items-center space-x-2">
@@ -246,7 +246,7 @@ export default function Login() {
                   } rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all duration-500 backdrop-blur-sm font-light`}
                   placeholder="Enter your password"
                 />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </div>
               {errors.password && (
                 <p className="mt-2 text-sm text-red-400 flex items-center space-x-2">
@@ -387,7 +387,7 @@ export default function Login() {
                 </>
               )}
             </div>
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </button>
 
           {/* Divider */}

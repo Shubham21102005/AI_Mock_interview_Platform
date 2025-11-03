@@ -112,7 +112,8 @@ export default function NewSession() {
             reject(new Error("PDF.js initialization error"));
           }
         };
-        script.onerror = () => reject(new Error("Failed to load PDF.js library"));
+        script.onerror = () =>
+          reject(new Error("Failed to load PDF.js library"));
         document.head.appendChild(script);
       });
     };
@@ -130,13 +131,19 @@ export default function NewSession() {
           for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
             const page = await pdf.getPage(pageNum);
             const textContent = await page.getTextContent();
-            const pageText = textContent.items.map((item: any) => item.str).join(" ");
+            const pageText = textContent.items
+              .map((item: any) => item.str)
+              .join(" ");
             fullText += pageText + "\n";
           }
 
           resolve(fullText.trim());
         } catch (err) {
-          reject(new Error("Failed to parse PDF. Please ensure the file is a valid PDF."));
+          reject(
+            new Error(
+              "Failed to parse PDF. Please ensure the file is a valid PDF."
+            )
+          );
         }
       };
       reader.onerror = () => reject(new Error("Failed to read file."));
@@ -152,8 +159,11 @@ export default function NewSession() {
     if (!file) return;
 
     // Validate and branch by file type
-    const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
-    const isTxt = file.type === "text/plain" || file.name.toLowerCase().endsWith(".txt");
+    const isPdf =
+      file.type === "application/pdf" ||
+      file.name.toLowerCase().endsWith(".pdf");
+    const isTxt =
+      file.type === "text/plain" || file.name.toLowerCase().endsWith(".txt");
     if (!isPdf && !isTxt) {
       setError("Please upload a PDF or TXT file only.");
       return;
@@ -175,7 +185,8 @@ export default function NewSession() {
         : await new Promise<string>((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => resolve(String(reader.result || ""));
-            reader.onerror = () => reject(new Error("Failed to read text file."));
+            reader.onerror = () =>
+              reject(new Error("Failed to read text file."));
             reader.readAsText(file);
           });
       setSessionData((prev) => ({
@@ -520,7 +531,7 @@ export default function NewSession() {
           </h4>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
                 <span className="text-blue-400 font-bold text-sm">1</span>
               </div>
               <div>
@@ -532,7 +543,7 @@ export default function NewSession() {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
                 <span className="text-blue-400 font-bold text-sm">2</span>
               </div>
               <div>
@@ -546,7 +557,7 @@ export default function NewSession() {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
                 <span className="text-blue-400 font-bold text-sm">3</span>
               </div>
               <div>

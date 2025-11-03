@@ -270,7 +270,10 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center space-x-4">
               {user && (
-                <Link href="/profile" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <Link
+                  href="/profile"
+                  className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+                >
                   {user.profilePicture ? (
                     <img
                       src={user.profilePicture}
@@ -375,7 +378,7 @@ export default function Dashboard() {
             },
           ].map((stat, index) => (
             <div key={index} className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
               <div className="relative bg-black border border-gray-800 p-8 rounded-2xl backdrop-blur-sm h-full transform group-hover:-translate-y-1 transition-all duration-500">
                 <div className="flex items-center justify-between">
                   <div>
@@ -417,10 +420,9 @@ export default function Dashboard() {
                 />
               </svg>
             </div>
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </button>
         </div>
-
 
         {/* Sessions List */}
         <div className="space-y-8">
@@ -468,7 +470,7 @@ export default function Dashboard() {
             <div className="grid gap-6">
               {sessions.map((session) => (
                 <div key={session._id} className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
                   <div className="relative bg-black border border-gray-800 p-8 rounded-2xl backdrop-blur-sm transform group-hover:-translate-y-1 transition-all duration-500">
                     <div className="flex justify-between items-start mb-6">
                       <div className="flex-1">
@@ -645,4 +647,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
