@@ -282,37 +282,48 @@ export default function NewSession() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
-      <nav className="bg-black/90 border-b border-gray-800 sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-4 h-4 text-black"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                    />
-                  </svg>
-                </div>
-                <h1 className="text-xl font-bold text-white tracking-tight">
-                  InterviewAI
-                </h1>
+      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <div className="w-10 h-10 bg-white flex items-center justify-center">
+                <svg
+                  className="w-5 h-5 text-black"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                  />
+                </svg>
               </div>
+              <h1 className="text-xl font-bold tracking-tight uppercase">
+                InterviewAI
+              </h1>
             </div>
-            <div className="flex items-center space-x-4">
+            <div>
               <Link
                 href="/dashboard"
-                className="text-gray-400 hover:text-white px-4 py-2 text-sm font-medium transition-all duration-300 border border-transparent hover:border-gray-600 rounded-lg"
+                className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all font-bold uppercase tracking-wider text-sm flex items-center gap-2"
               >
-                ← Back to Dashboard
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+                <span>Dashboard</span>
               </Link>
             </div>
           </div>
@@ -320,12 +331,12 @@ export default function NewSession() {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="mb-12 border-2 border-white/10 p-8">
+          <h2 className="text-4xl font-bold tracking-tighter uppercase mb-3">
             Create New Interview Session
           </h2>
-          <p className="text-gray-400">
+          <p className="text-white/60 leading-relaxed">
             Upload your resume and provide job details to start an AI-powered
             interview.
           </p>
@@ -333,58 +344,64 @@ export default function NewSession() {
 
         {/* Success/Error Messages */}
         {success && (
-          <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
-            <div className="flex items-center">
-              <svg
-                className="w-5 h-5 text-green-400 mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span className="text-green-400">{success}</span>
+          <div className="mb-6 border-2 border-green-500/50 p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5 border-2 border-green-500 flex items-center justify-center">
+                <svg
+                  className="w-3 h-3 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <span className="text-green-500 text-sm">{success}</span>
             </div>
           </div>
         )}
 
         {error && (
-          <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
-            <div className="flex items-center">
-              <svg
-                className="w-5 h-5 text-red-400 mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span className="text-red-400">{error}</span>
+          <div className="mb-6 border-2 border-red-500/50 p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5 border-2 border-red-500 flex items-center justify-center">
+                <svg
+                  className="w-3 h-3 text-red-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+              <span className="text-red-500 text-sm">{error}</span>
             </div>
           </div>
         )}
 
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-8">
+        <div className="border-2 border-white/10">
           {/* Resume Section */}
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold text-white mb-4">Resume</h3>
+          <div className="border-b-2 border-white/10 p-8">
+            <h3 className="text-2xl font-bold tracking-tight uppercase mb-6">
+              01. Resume
+            </h3>
 
             {/* PDF Upload Option */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-300 mb-3">
+            <div className="mb-8">
+              <label className="block text-xs font-mono text-white/40 mb-3 uppercase tracking-widest">
                 Upload PDF Resume
               </label>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center gap-4">
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -395,63 +412,65 @@ export default function NewSession() {
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   disabled={isParsingPdf}
-                  className="px-4 py-2 border border-gray-600 text-gray-300 hover:text-white hover:border-gray-500 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-bold uppercase tracking-wider text-sm"
                 >
-                  {isParsingPdf ? "Parsing PDF..." : "Choose PDF File"}
+                  {isParsingPdf ? "Parsing PDF..." : "Choose File"}
                 </button>
                 {uploadedFile && (
-                  <div className="flex items-center space-x-2">
-                    <svg
-                      className="w-5 h-5 text-green-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-green-400 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-green-500 flex items-center justify-center">
+                      <svg
+                        className="w-3 h-3 text-green-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={3}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-green-500 text-sm font-mono">
                       {uploadedFile.name}
                     </span>
                   </div>
                 )}
               </div>
-              <p className="text-gray-500 text-sm mt-2">
-                Upload a PDF file (max 10MB) or paste your resume text below.
+              <p className="text-white/40 text-xs font-mono mt-3 uppercase tracking-wider">
+                Max 10MB • PDF or TXT
               </p>
             </div>
 
             {/* Manual Text Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-xs font-mono text-white/40 mb-3 uppercase tracking-widest">
                 Or Paste Resume Text
               </label>
               <textarea
                 value={sessionData.resume}
                 onChange={(e) => handleResumeTextChange(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 text-white min-h-[200px]"
-                placeholder="Paste your resume content here or upload a PDF above..."
+                className="w-full bg-black border-2 border-white/20 p-4 text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors min-h-[200px]"
+                placeholder="Paste your resume content here..."
                 rows={8}
               />
-              <p className="text-gray-500 text-sm mt-2">
-                Character count: {sessionData.resume.length}
+              <p className="text-white/40 text-xs font-mono mt-2 uppercase tracking-wider">
+                Characters: {sessionData.resume.length}
               </p>
             </div>
           </div>
 
           {/* Job Details Section */}
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              Job Details
+          <div className="border-b-2 border-white/10 p-8">
+            <h3 className="text-2xl font-bold tracking-tight uppercase mb-6">
+              02. Job Details
             </h3>
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
                   Job Title *
                 </label>
                 <input
@@ -460,13 +479,13 @@ export default function NewSession() {
                   onChange={(e) =>
                     handleJobDetailsChange("title", e.target.value)
                   }
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-white"
-                  placeholder="e.g., Frontend Developer, Software Engineer"
+                  className="w-full bg-black border-2 border-white/20 p-4 text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors"
+                  placeholder="Frontend Developer"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
                   Job Description *
                 </label>
                 <textarea
@@ -474,15 +493,15 @@ export default function NewSession() {
                   onChange={(e) =>
                     handleJobDetailsChange("description", e.target.value)
                   }
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-white"
+                  className="w-full bg-black border-2 border-white/20 p-4 text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors"
                   rows={4}
                   placeholder="Paste the job description here..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Years of Experience Required
+                <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
+                  Years of Experience
                 </label>
                 <input
                   type="text"
@@ -490,83 +509,83 @@ export default function NewSession() {
                   onChange={(e) =>
                     handleJobDetailsChange("yoeRequired", e.target.value)
                   }
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-white"
-                  placeholder="e.g., 2+ years, 3-5 years, Senior level"
+                  className="w-full bg-black border-2 border-white/20 p-4 text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors"
+                  placeholder="2+ years"
                 />
               </div>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-between items-center pt-6 border-t border-gray-800">
+          <div className="flex justify-between items-center p-8">
             <button
               onClick={clearForm}
-              className="px-6 py-3 border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 rounded-lg transition-all duration-300"
+              className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all font-bold uppercase tracking-wider text-sm"
             >
               Clear Form
             </button>
 
-            <div className="flex space-x-4">
+            <div className="flex gap-4">
               <Link
                 href="/dashboard"
-                className="px-6 py-3 border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 rounded-lg transition-all duration-300"
+                className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all font-bold uppercase tracking-wider text-sm"
               >
                 Cancel
               </Link>
               <button
                 onClick={createSession}
                 disabled={loading || isParsingPdf}
-                className="px-8 py-3 bg-white text-black hover:bg-gray-100 rounded-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-3 bg-white text-black hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-bold uppercase tracking-wider text-sm"
               >
-                {loading ? "Creating Session..." : "Create Session"}
+                {loading ? "Creating..." : "Create Session"}
               </button>
             </div>
           </div>
         </div>
 
         {/* Help Section */}
-        <div className="mt-8 bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h4 className="text-lg font-semibold text-white mb-4">
-            How it works
-          </h4>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
-                <span className="text-blue-400 font-bold text-sm">1</span>
+        <div className="mt-8 border-2 border-white/10">
+          <div className="border-b-2 border-white/10 p-6">
+            <h4 className="text-2xl font-bold tracking-tight uppercase">
+              How it works
+            </h4>
+          </div>
+          <div className="grid md:grid-cols-3 divide-x-2 divide-white/10">
+            <div className="p-6">
+              <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center mb-4">
+                <span className="font-bold text-lg">1</span>
               </div>
-              <div>
-                <h5 className="text-white font-medium mb-1">Upload Resume</h5>
-                <p className="text-gray-400 text-sm">
-                  Upload your PDF resume or paste the text directly.
-                </p>
-              </div>
+              <h5 className="text-lg font-bold uppercase tracking-tight mb-2">
+                Upload Resume
+              </h5>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Upload your PDF resume or paste the text directly.
+              </p>
             </div>
 
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
-                <span className="text-blue-400 font-bold text-sm">2</span>
+            <div className="p-6">
+              <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center mb-4">
+                <span className="font-bold text-lg">2</span>
               </div>
-              <div>
-                <h5 className="text-white font-medium mb-1">
-                  Provide Job Details
-                </h5>
-                <p className="text-gray-400 text-sm">
-                  Enter the job title, description, and experience requirements.
-                </p>
-              </div>
+              <h5 className="text-lg font-bold uppercase tracking-tight mb-2">
+                Provide Job Details
+              </h5>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Enter the job title, description, and experience requirements.
+              </p>
             </div>
 
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
-                <span className="text-blue-400 font-bold text-sm">3</span>
+            <div className="p-6">
+              <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center mb-4">
+                <span className="font-bold text-lg">3</span>
               </div>
-              <div>
-                <h5 className="text-white font-medium mb-1">Start Interview</h5>
-                <p className="text-gray-400 text-sm">
-                  AI will conduct a personalized interview based on your resume
-                  and job requirements.
-                </p>
-              </div>
+              <h5 className="text-lg font-bold uppercase tracking-tight mb-2">
+                Start Interview
+              </h5>
+              <p className="text-white/60 text-sm leading-relaxed">
+                AI will conduct a personalized interview based on your resume
+                and job requirements.
+              </p>
             </div>
           </div>
         </div>

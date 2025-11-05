@@ -4,63 +4,63 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
-      <nav className="bg-black/90 border-b border-gray-800 sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white flex items-center justify-center">
                   <svg
-                    className="w-4 h-4 text-black"
+                    className="w-5 h-5 text-black"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    strokeWidth={2}
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2}
                       d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
                     />
                   </svg>
                 </div>
-                <h1 className="text-xl font-bold text-white tracking-tight">
+                <h1 className="text-xl font-bold text-white tracking-tight uppercase">
                   InterviewAI
                 </h1>
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
+              <div className="flex items-center gap-8">
                 <Link
                   href="#features"
-                  className="text-gray-400 hover:text-white px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105"
+                  className="text-white/60 hover:text-white text-sm font-medium transition-colors uppercase tracking-wider"
                 >
                   Features
                 </Link>
                 <Link
                   href="#how-it-works"
-                  className="text-gray-400 hover:text-white px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105"
+                  className="text-white/60 hover:text-white text-sm font-medium transition-colors uppercase tracking-wider"
                 >
                   How it Works
                 </Link>
                 <Link
                   href="#pricing"
-                  className="text-gray-400 hover:text-white px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105"
+                  className="text-white/60 hover:text-white text-sm font-medium transition-colors uppercase tracking-wider"
                 >
                   Pricing
                 </Link>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="text-gray-400 hover:text-white px-4 py-2 text-sm font-medium transition-all duration-300 border border-transparent hover:border-gray-600 rounded-lg"
+                className="px-5 py-3 border-2 border-white/20 hover:border-white text-white text-sm font-medium transition-all uppercase tracking-wider"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="bg-white text-black hover:bg-gray-100 px-6 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 border border-white"
+                className="px-5 py-3 bg-white text-black hover:bg-white/90 text-sm font-medium transition-all uppercase tracking-wider"
               >
                 Get Started
               </Link>
@@ -70,79 +70,78 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-gray-900"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800/20 via-black to-black"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gray-900 border border-gray-800 mb-8 backdrop-blur-sm">
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              <span className="text-sm text-gray-300 font-medium">
-                Next-generation hiring platform
-              </span>
-            </div>
-            <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tight">
-              Interview
-              <span className="block bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Intelligence
-              </span>
-            </h1>
-            <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
-              AI that doesn't just ask questions—it understands context, adapts
-              in real-time, and delivers insights that transform how you
-              discover talent.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link
-                href="/register"
-                className="group bg-white text-black hover:bg-gray-100 px-10 py-5 rounded-2xl text-lg font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl flex items-center space-x-4 border-2 border-white"
-              >
-                <span className="tracking-wide">Start Building</span>
-                <svg
-                  className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+      <section className="relative py-32 lg:py-48">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="border-2 border-white/10 p-12 lg:p-20 relative">
+            <div className="absolute top-0 right-0 w-40 h-40 border-l-2 border-b-2 border-white/5"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 border-r-2 border-t-2 border-white/5"></div>
+
+            <div className="text-center max-w-5xl mx-auto">
+              <div className="inline-flex items-center gap-3 px-4 py-2 border-2 border-white/20 mb-12">
+                <span className="w-2 h-2 bg-white"></span>
+                <span className="text-sm text-white/70 font-mono uppercase tracking-widest">
+                  Next-gen hiring platform
+                </span>
+              </div>
+
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-none">
+                INTERVIEW
+                <span className="block mt-2">INTELLIGENCE</span>
+              </h1>
+
+              <p className="text-xl md:text-2xl text-white/60 mb-16 max-w-3xl mx-auto leading-relaxed">
+                AI-powered interviews that understand context, adapt in real-time,
+                and deliver actionable insights.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/register"
+                  className="group px-10 py-5 bg-white text-black hover:bg-white/90 transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                  <span>Start Building</span>
+                  <svg
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                     strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-              </Link>
-              <Link
-                href="#demo"
-                className="group border-2 border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 px-10 py-5 rounded-2xl text-lg font-semibold transition-all duration-500 hover:bg-gray-900/50 flex items-center space-x-4 backdrop-blur-sm"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </Link>
+                <Link
+                  href="#demo"
+                  className="group px-10 py-5 border-2 border-white/20 hover:border-white hover:bg-white/5 text-white transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                     strokeWidth={2}
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span className="tracking-wide">View Case Study</span>
-              </Link>
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>View Demo</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Animated background elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
       </section>
 
       {/* Features Section */}

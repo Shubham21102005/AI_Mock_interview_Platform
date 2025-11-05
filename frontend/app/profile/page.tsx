@@ -187,8 +187,15 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-xl">Loading profile...</div>
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="border-2 border-white/10 p-12">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-white/20 border-t-white mx-auto mb-6 animate-spin"></div>
+            <p className="text-xl font-mono uppercase tracking-wider text-white/60">
+              Loading profile...
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -200,19 +207,19 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-black/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Profile</h1>
+      <header className="border-b-2 border-white/10 sticky top-0 z-10 bg-black">
+        <div className="max-w-4xl mx-auto px-6 py-6 flex justify-between items-center">
+          <h1 className="text-2xl font-bold tracking-tight uppercase">Profile</h1>
           <div className="flex gap-3">
             <button
               onClick={() => router.push("/dashboard")}
-              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+              className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all font-bold uppercase tracking-wider text-sm"
             >
               Dashboard
             </button>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors flex items-center gap-2"
+              className="px-6 py-3 border-2 border-red-500/50 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all font-bold uppercase tracking-wider text-sm flex items-center gap-2"
             >
               <LogOut className="w-4 h-4" />
               Logout
@@ -224,60 +231,98 @@ export default function ProfilePage() {
       <main className="max-w-4xl mx-auto px-6 py-12">
         {/* Alerts */}
         {error && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500">
-            {error}
+          <div className="mb-6 border-2 border-red-500/50 p-4 bg-red-500/10">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5 border-2 border-red-500 flex items-center justify-center">
+                <svg
+                  className="w-3 h-3 text-red-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+              <span className="text-red-500 text-sm">{error}</span>
+            </div>
           </div>
         )}
         {success && (
-          <div className="mb-6 p-4 bg-green-500/10 border border-green-500 rounded-lg text-green-500">
-            {success}
+          <div className="mb-6 border-2 border-green-500/50 p-4 bg-green-500/10">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5 border-2 border-green-500 flex items-center justify-center">
+                <svg
+                  className="w-3 h-3 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <span className="text-green-500 text-sm">{success}</span>
+            </div>
           </div>
         )}
 
         {/* Profile Card */}
-        <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 shadow-2xl">
+        <div className="border-2 border-white/10">
           {/* Profile Picture Section */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="relative">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1">
-                {previewUrl ? (
-                  <img
-                    src={previewUrl}
-                    alt="Profile"
-                    className="w-full h-full rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
-                    <User className="w-16 h-16 text-gray-400" />
-                  </div>
+          <div className="border-b-2 border-white/10 p-8">
+            <div className="flex flex-col items-center">
+              <div className="relative">
+                <div className="w-32 h-32 border-4 border-white/30 p-1 bg-white/5">
+                  {previewUrl ? (
+                    <img
+                      src={previewUrl}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-black flex items-center justify-center">
+                      <User className="w-16 h-16 text-white/40" />
+                    </div>
+                  )}
+                </div>
+                {isEditing && (
+                  <label
+                    htmlFor="profile-picture"
+                    className="absolute bottom-0 right-0 bg-white hover:bg-white/90 p-2 cursor-pointer transition-all"
+                  >
+                    <Upload className="w-5 h-5 text-black" />
+                    <input
+                      id="profile-picture"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="hidden"
+                    />
+                  </label>
                 )}
               </div>
-              {isEditing && (
-                <label
-                  htmlFor="profile-picture"
-                  className="absolute bottom-0 right-0 bg-blue-600 hover:bg-blue-700 rounded-full p-2 cursor-pointer transition-colors"
-                >
-                  <Upload className="w-5 h-5" />
-                  <input
-                    id="profile-picture"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                </label>
+              {isEditing && selectedFile && (
+                <p className="mt-3 text-xs font-mono text-white/40 uppercase tracking-wider">
+                  {selectedFile.name}
+                </p>
               )}
             </div>
-            {isEditing && selectedFile && (
-              <p className="mt-3 text-sm text-gray-400">{selectedFile.name}</p>
-            )}
           </div>
 
           {/* Profile Information */}
-          <div className="space-y-6">
+          <div className="p-8 space-y-6">
             {/* Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
+              <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
                 Full Name
               </label>
               {isEditing ? (
@@ -286,17 +331,17 @@ export default function ProfilePage() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="w-full px-4 py-4 bg-black border-2 border-white/20 text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors"
                   placeholder="Enter your name"
                 />
               ) : (
-                <p className="text-lg text-white">{user.name}</p>
+                <p className="text-lg text-white/90">{user.name}</p>
               )}
             </div>
 
             {/* Username */}
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
+              <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
                 Username
               </label>
               {isEditing ? (
@@ -305,29 +350,31 @@ export default function ProfilePage() {
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="w-full px-4 py-4 bg-black border-2 border-white/20 text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors"
                   placeholder="Enter your username"
                 />
               ) : (
-                <p className="text-lg text-white">@{user.username}</p>
+                <p className="text-lg text-white/90 font-mono">@{user.username}</p>
               )}
             </div>
 
             {/* Email (Read-only) */}
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
+              <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
                 Email Address
               </label>
-              <p className="text-lg text-white">{user.email}</p>
-              <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+              <p className="text-lg text-white/90">{user.email}</p>
+              <p className="text-xs font-mono text-white/30 mt-2 uppercase tracking-wider">
+                Email cannot be changed
+              </p>
             </div>
 
             {/* Member Since */}
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
+              <label className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest">
                 Member Since
               </label>
-              <p className="text-lg text-white">
+              <p className="text-lg text-white/90">
                 {new Date(user.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -338,13 +385,13 @@ export default function ProfilePage() {
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-8 flex gap-4">
+          <div className="border-t-2 border-white/10 p-8">
             {isEditing ? (
-              <>
+              <div className="flex gap-4">
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600/50 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium"
+                  className="flex-1 px-8 py-4 bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
                 >
                   <Save className="w-5 h-5" />
                   {saving ? "Saving..." : "Save Changes"}
@@ -352,16 +399,16 @@ export default function ProfilePage() {
                 <button
                   onClick={handleCancel}
                   disabled={saving}
-                  className="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-700/50 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium"
+                  className="flex-1 px-8 py-4 border-2 border-white/20 hover:border-white hover:bg-white/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
                 >
                   <X className="w-5 h-5" />
                   Cancel
                 </button>
-              </>
+              </div>
             ) : (
               <button
                 onClick={() => setIsEditing(true)}
-                className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium"
+                className="w-full px-8 py-4 bg-white text-black hover:bg-white/90 transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
               >
                 <Edit2 className="w-5 h-5" />
                 Edit Profile

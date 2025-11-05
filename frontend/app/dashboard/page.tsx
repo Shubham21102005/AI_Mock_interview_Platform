@@ -196,11 +196,13 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="flex items-center space-x-3">
-          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-white text-lg font-light">
-            Loading your dashboard...
-          </span>
+        <div className="border-2 border-white/10 p-12">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-white/20 border-t-white mx-auto mb-6 animate-spin"></div>
+            <p className="text-xl font-mono uppercase tracking-wider text-white/60">
+              Loading dashboard...
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -208,33 +210,35 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg
-              className="w-8 h-8 text-red-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
+      <div className="min-h-screen bg-black flex items-center justify-center p-6">
+        <div className="border-2 border-red-500/50 max-w-md w-full">
+          <div className="border-b-2 border-red-500/50 p-6 flex items-center gap-4">
+            <div className="w-12 h-12 border-2 border-red-500/50 flex items-center justify-center">
+              <svg
+                className="w-6 h-6 text-red-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
                 strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold uppercase tracking-tight">Error</h2>
           </div>
-          <h2 className="text-xl font-bold text-white mb-2">
-            Something went wrong
-          </h2>
-          <p className="text-gray-400 mb-4">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-6 py-3 bg-white text-black rounded-xl font-medium hover:bg-gray-100 transition-all duration-300"
-          >
-            Try Again
-          </button>
+          <div className="p-8">
+            <p className="text-white/70 mb-8 leading-relaxed">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="w-full p-4 border-2 border-white hover:bg-white hover:text-black transition-all font-bold uppercase tracking-wider"
+            >
+              Try Again
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -243,56 +247,56 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-black">
       {/* Navigation */}
-      <nav className="bg-black/90 border-b border-gray-800 sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-4 h-4 text-black"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                    />
-                  </svg>
-                </div>
-                <h1 className="text-xl font-bold text-white tracking-tight">
-                  InterviewAI
-                </h1>
+      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <div className="w-10 h-10 bg-white flex items-center justify-center">
+                <svg
+                  className="w-5 h-5 text-black"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                  />
+                </svg>
               </div>
+              <h1 className="text-xl font-bold tracking-tight uppercase">
+                InterviewAI
+              </h1>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-4">
               {user && (
                 <Link
                   href="/profile"
-                  className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-3 p-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all"
                 >
                   {user.profilePicture ? (
                     <img
                       src={user.profilePicture}
                       alt={user.name}
-                      className="w-8 h-8 rounded-full border border-gray-700"
+                      className="w-8 h-8 border-2 border-white/30"
                     />
                   ) : (
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <span className="text-black text-sm font-medium">
+                    <div className="w-8 h-8 bg-white flex items-center justify-center">
+                      <span className="text-black text-sm font-bold">
                         {user.name?.charAt(0).toUpperCase()}
                       </span>
                     </div>
                   )}
-                  <span className="text-gray-300 font-light">{user.name}</span>
+                  <span className="text-white/70 font-mono text-sm uppercase tracking-wider">
+                    {user.name}
+                  </span>
                 </Link>
               )}
               <button
                 onClick={handleLogout}
-                className="text-gray-400 hover:text-white px-4 py-2 text-sm font-medium transition-all duration-300 border border-transparent hover:border-gray-600 rounded-lg"
+                className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white hover:text-black transition-all font-bold uppercase tracking-wider text-sm"
               >
                 Logout
               </button>
@@ -302,340 +306,332 @@ export default function Dashboard() {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Welcome Section */}
-        <div className="mb-12 text-center">
-          <h2 className="text-5xl font-bold text-white mb-4 tracking-tight">
-            Welcome back, {user?.name || "User"}
-          </h2>
-          <p className="text-gray-400 text-lg font-light max-w-2xl mx-auto leading-relaxed">
-            Ready to continue your journey toward better hiring decisions?
-          </p>
+        <div className="mb-12 border-2 border-white/10 p-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 border-l-2 border-b-2 border-white/5"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 border-r-2 border-t-2 border-white/5"></div>
+          <div className="relative text-center">
+            <h2 className="text-5xl font-bold mb-4 tracking-tighter uppercase">
+              Welcome back, {user?.name || "User"}
+            </h2>
+            <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
+              Ready to continue your journey toward better hiring decisions?
+            </p>
+          </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
           {[
             {
               label: "Total Sessions",
               value: sessions.length,
               icon: (
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
               ),
-              bg: "bg-gray-900/50",
             },
             {
               label: "Completed",
               value: sessions.filter((s) => s.status === "completed").length,
               icon: (
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
               ),
-              bg: "bg-gray-900/50",
             },
             {
               label: "In Progress",
               value: sessions.filter((s) => s.status === "in-progress").length,
               icon: (
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
               ),
-              bg: "bg-gray-900/50",
             },
           ].map((stat, index) => (
-            <div key={index} className="group relative">
-              <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
-              <div className="relative bg-black border border-gray-800 p-8 rounded-2xl backdrop-blur-sm h-full transform group-hover:-translate-y-1 transition-all duration-500">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-gray-400 text-sm font-light mb-2">
-                      {stat.label}
-                    </p>
-                    <p className="text-4xl font-bold text-white">
-                      {stat.value}
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                    {stat.icon}
-                  </div>
+            <div key={index} className="border-2 border-white/10 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-xs font-mono text-white/40 uppercase tracking-widest">
+                  {stat.label}
+                </p>
+                <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center">
+                  {stat.icon}
                 </div>
               </div>
+              <p className="text-5xl font-bold tracking-tighter">{stat.value}</p>
             </div>
           ))}
         </div>
 
         {/* Create Session Button */}
-        <div className="mb-12 text-center">
+        <div className="mb-12">
           <button
             onClick={navigateToCreateSession}
-            className="group relative bg-white text-black hover:bg-gray-100 px-10 py-5 rounded-2xl text-lg font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl border-2 border-white"
+            className="w-full py-6 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-lg flex items-center justify-center gap-4 group"
           >
-            <div className="flex items-center space-x-3">
-              <span>Create New Session</span>
-              <svg
-                className="w-5 h-5 group-hover:rotate-90 transition-transform duration-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-            </div>
-            <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <span>Create New Session</span>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
           </button>
         </div>
 
         {/* Sessions List */}
-        <div className="space-y-8">
-          <div className="text-center">
-            <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">
+        <div>
+          <div className="border-b-2 border-white/10 pb-6 mb-8">
+            <h3 className="text-3xl font-bold tracking-tight uppercase mb-2">
               Your Interview Sessions
             </h3>
-            <p className="text-gray-400 font-light">
+            <p className="text-white/60">
               Manage and track all your interview sessions
             </p>
           </div>
 
           {sessions.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="w-24 h-24 bg-gray-900/50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-800">
+            <div className="border-2 border-white/10 p-16 text-center">
+              <div className="w-24 h-24 border-2 border-white/20 flex items-center justify-center mx-auto mb-8">
                 <svg
-                  className="w-10 h-10 text-gray-500"
+                  className="w-12 h-12 text-white/40"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
               </div>
-              <h4 className="text-xl font-semibold text-white mb-3">
+              <h4 className="text-2xl font-bold uppercase tracking-tight mb-3">
                 No sessions yet
               </h4>
-              <p className="text-gray-400 mb-6 max-w-sm mx-auto font-light">
+              <p className="text-white/60 mb-8 max-w-sm mx-auto leading-relaxed">
                 Create your first interview session to get started with
                 AI-powered interviews.
               </p>
               <button
                 onClick={navigateToCreateSession}
-                className="px-8 py-4 bg-white text-black rounded-2xl font-medium hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white"
+                className="px-8 py-4 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider"
               >
                 Create First Session
               </button>
             </div>
           ) : (
-            <div className="grid gap-6">
+            <div className="space-y-6">
               {sessions.map((session) => (
-                <div key={session._id} className="group relative">
-                  <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
-                  <div className="relative bg-black border border-gray-800 p-8 rounded-2xl backdrop-blur-sm transform group-hover:-translate-y-1 transition-all duration-500">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="flex-1">
-                        <h4 className="text-2xl font-bold text-white mb-3 tracking-tight">
-                          {session.jobDetails.title || "Interview Session"}
-                        </h4>
-                        <div className="flex items-center space-x-4 text-sm text-gray-400">
-                          <span className="flex items-center space-x-2">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
-                            </svg>
-                            <span>
-                              Created{" "}
-                              {new Date(session.createdAt).toLocaleDateString()}
-                            </span>
-                          </span>
-                          <span className="flex items-center space-x-2">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                              />
-                            </svg>
-                            <span>
-                              {session.currentQuestionCount || 0} questions
-                            </span>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <span
-                          className={`px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm ${
-                            session.status === "completed"
-                              ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                              : session.status === "in-progress"
-                              ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
-                              : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
-                          }`}
-                        >
-                          {session.status.charAt(0).toUpperCase() +
-                            session.status.slice(1)}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mb-6 space-y-3">
-                      {session.jobDetails.description && (
-                        <p className="text-gray-300 text-sm line-clamp-2 font-light">
-                          <span className="text-gray-400 font-medium">
-                            Description:
-                          </span>{" "}
-                          {session.jobDetails.description}
-                        </p>
-                      )}
-                      {session.jobDetails.yoeRequired && (
-                        <p className="text-gray-300 text-sm font-light">
-                          <span className="text-gray-400 font-medium">
-                            Experience:
-                          </span>{" "}
-                          {session.jobDetails.yoeRequired}
-                        </p>
-                      )}
-                    </div>
-
-                    {session.status === "completed" && session.feedback && (
-                      <div className="mb-6 p-6 bg-gray-900/50 rounded-2xl border border-gray-700 backdrop-blur-sm">
-                        <h5 className="text-white font-semibold mb-3 flex items-center space-x-2">
+                <div
+                  key={session._id}
+                  className="border-2 border-white/10 p-6 hover:bg-white/5 transition-colors"
+                >
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex-1">
+                      <h4 className="text-2xl font-bold tracking-tight uppercase mb-3">
+                        {session.jobDetails.title || "Interview Session"}
+                      </h4>
+                      <div className="flex items-center gap-6 text-xs font-mono text-white/40">
+                        <span className="flex items-center gap-2">
                           <svg
-                            className="w-5 h-5 text-green-400"
+                            className="w-4 h-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            strokeWidth={2}
                           >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                           </svg>
-                          <span>Interview Feedback</span>
-                        </h5>
-                        <div className="grid md:grid-cols-2 gap-4 text-sm">
+                          <span className="uppercase tracking-wider">
+                            {new Date(session.createdAt).toLocaleDateString()}
+                          </span>
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                            />
+                          </svg>
+                          <span className="uppercase tracking-wider">
+                            {session.currentQuestionCount || 0} Questions
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`px-3 py-1 border-2 text-xs font-mono uppercase ${
+                          session.status === "completed"
+                            ? "border-green-500/50 text-green-500"
+                            : session.status === "in-progress"
+                            ? "border-yellow-500/50 text-yellow-500"
+                            : "border-white/30 text-white/60"
+                        }`}
+                      >
+                        {session.status === "in-progress"
+                          ? "In Progress"
+                          : session.status}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mb-6 space-y-3">
+                    {session.jobDetails.description && (
+                      <p className="text-white/70 text-sm leading-relaxed">
+                        <span className="text-white/40 font-mono uppercase tracking-wider text-xs">
+                          Description:
+                        </span>{" "}
+                        {session.jobDetails.description}
+                      </p>
+                    )}
+                    {session.jobDetails.yoeRequired && (
+                      <p className="text-white/70 text-sm">
+                        <span className="text-white/40 font-mono uppercase tracking-wider text-xs">
+                          Experience:
+                        </span>{" "}
+                        {session.jobDetails.yoeRequired}
+                      </p>
+                    )}
+                  </div>
+
+                  {session.status === "completed" && session.feedback && (
+                    <div className="mb-6 border-2 border-green-500/30 p-6">
+                      <h5 className="text-sm font-mono text-white/40 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <div className="w-5 h-5 border-2 border-green-500 flex items-center justify-center">
+                          <svg
+                            className="w-3 h-3 text-green-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={3}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        </div>
+                        <span>Interview Feedback</span>
+                      </h5>
+                      <div className="grid md:grid-cols-2 gap-4 text-sm">
+                        <div className="space-y-2">
+                          <p className="text-white/70">
+                            <span className="text-white/40 font-mono">
+                              Overall:
+                            </span>{" "}
+                            {session.feedback.overall}
+                          </p>
+                          <p className="text-white/70">
+                            <span className="text-white/40 font-mono">
+                              Rating:
+                            </span>{" "}
+                            {session.feedback.rating}/10
+                          </p>
+                        </div>
+                        {session.feedback.strengths.length > 0 && (
                           <div>
-                            <p className="text-gray-300 mb-2 font-light">
-                              <span className="text-gray-400 font-medium">
-                                Overall:
+                            <p className="text-white/70">
+                              <span className="text-white/40 font-mono">
+                                Strengths:
                               </span>{" "}
-                              {session.feedback.overall}
-                            </p>
-                            <p className="text-gray-300 font-light">
-                              <span className="text-gray-400 font-medium">
-                                Rating:
-                              </span>{" "}
-                              {session.feedback.rating}/10
+                              {session.feedback.strengths.join(", ")}
                             </p>
                           </div>
-                          {session.feedback.strengths.length > 0 && (
-                            <div>
-                              <p className="text-gray-300 font-light">
-                                <span className="text-gray-400 font-medium">
-                                  Strengths:
-                                </span>{" "}
-                                {session.feedback.strengths.join(", ")}
-                              </p>
-                            </div>
-                          )}
-                        </div>
+                        )}
                       </div>
-                    )}
+                    </div>
+                  )}
 
-                    <div className="flex justify-between items-center">
-                      <div className="text-sm text-gray-400 font-light">
-                        Last updated:{" "}
-                        {new Date(session.updatedAt).toLocaleDateString()}
-                      </div>
-                      <div className="flex space-x-3">
-                        {session.status === "pending" && (
-                          <button
-                            onClick={() => startInterview(session._id)}
-                            className="px-6 py-3 bg-white text-black hover:bg-gray-100 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 border-2 border-white"
-                          >
-                            Start Interview
-                          </button>
-                        )}
-                        {session.status === "in-progress" && (
-                          <Link
-                            href={`/interview/${session._id}`}
-                            className="px-6 py-3 bg-white text-black hover:bg-gray-100 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 border-2 border-white"
-                          >
-                            Continue
-                          </Link>
-                        )}
-                        {session.status === "completed" && (
-                          <Link
-                            href={`/feedback/${session._id}`}
-                            className="px-6 py-3 bg-white text-black hover:bg-gray-100 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 border-2 border-white"
-                          >
-                            View Feedback
-                          </Link>
-                        )}
+                  <div className="flex justify-between items-center border-t-2 border-white/10 pt-6">
+                    <div className="text-xs font-mono text-white/40 uppercase tracking-wider">
+                      Updated: {new Date(session.updatedAt).toLocaleDateString()}
+                    </div>
+                    <div className="flex gap-3">
+                      {session.status === "pending" && (
                         <button
-                          onClick={() => deleteSession(session._id)}
-                          className="px-6 py-3 border-2 border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-400 hover:text-red-300 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+                          onClick={() => startInterview(session._id)}
+                          className="px-6 py-3 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
                         >
-                          Delete
+                          Start Interview
                         </button>
-                      </div>
+                      )}
+                      {session.status === "in-progress" && (
+                        <Link
+                          href={`/interview/${session._id}`}
+                          className="px-6 py-3 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
+                        >
+                          Continue
+                        </Link>
+                      )}
+                      {session.status === "completed" && (
+                        <Link
+                          href={`/feedback/${session._id}`}
+                          className="px-6 py-3 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
+                        >
+                          View Feedback
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => deleteSession(session._id)}
+                        className="px-6 py-3 border-2 border-red-500/50 text-red-500 hover:bg-red-500/10 hover:border-red-400 transition-all font-bold uppercase tracking-wider text-sm"
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </div>

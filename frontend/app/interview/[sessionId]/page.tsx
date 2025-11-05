@@ -53,57 +53,45 @@ function AVTile({
   accent?: string;
 }) {
   return (
-    <div
-      className={`relative overflow-hidden rounded-2xl border border-black/30 bg-linear-to-br ${accent} ${className}`}
-    >
+    <div className={`relative overflow-hidden border-2 border-white/20 bg-black ${className}`}>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center bg-black/25 backdrop-blur">
-          <span className="text-white/95 text-3xl md:text-4xl font-semibold select-none">
+        <div className="relative w-28 h-28 md:w-32 md:h-32 border-4 border-white/30 flex items-center justify-center bg-white/5">
+          <span className="text-white text-3xl md:text-4xl font-bold select-none">
             {initial}
           </span>
-          <span
-            className={`absolute inset-0 rounded-full border-2 border-white/30 ${
-              speaking ? "animate-ping" : "opacity-0"
-            }`}
-          />
-          <span
-            className={`absolute inset-0 rounded-full border-2 border-white/20 ${
-              speaking ? "animate-ping [animation-delay:200ms]" : "opacity-0"
-            }`}
-          />
-          <span
-            className={`absolute inset-0 rounded-full border border-white/10 ${
-              speaking ? "animate-ping [animation-delay:400ms]" : "opacity-0"
-            }`}
-          />
+          {speaking && (
+            <>
+              <span className="absolute inset-0 border-4 border-white/30 animate-ping" />
+              <span className="absolute inset-0 border-4 border-white/20 animate-ping [animation-delay:200ms]" />
+            </>
+          )}
         </div>
       </div>
-      <div className="absolute bottom-3 left-4 text-white/90 text-sm font-medium drop-shadow">
+      <div className="absolute bottom-3 left-4 text-xs font-mono text-white/90 uppercase tracking-wider">
         {name}
       </div>
       <div
-        className={`absolute top-3 right-3 w-7 h-7 rounded-full ${
-          speaking ? "bg-green-500/90" : "bg-gray-600/60"
-        } flex items-center justify-center border border-white/20`}
+        className={`absolute top-3 right-3 w-8 h-8 border-2 ${
+          speaking ? "border-green-500 bg-green-500/20" : "border-white/30 bg-white/10"
+        } flex items-center justify-center`}
       >
         <svg
-          className="w-4 h-4 text-white"
+          className={`w-4 h-4 ${speaking ? "text-green-500" : "text-white/60"}`}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
+          strokeWidth={2}
         >
           {speaking ? (
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
               d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
             />
           ) : (
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
               d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
             />
           )}
@@ -128,57 +116,67 @@ function TranscriptPanel({
     if (ref.current) ref.current.scrollTop = ref.current.scrollHeight;
   }, [conversation, interim, processing]);
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="text-white font-semibold mb-3 flex items-center gap-2">
-        <svg
-          className="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-          />
-        </svg>
-        Live Transcript
+    <div className="w-full h-full flex flex-col border-2 border-white/10">
+      <div className="border-b-2 border-white/10 p-4">
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 border-2 border-white/30 flex items-center justify-center">
+            <svg
+              className="w-3 h-3"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+              />
+            </svg>
+          </div>
+          <span className="font-bold uppercase tracking-tight text-sm">
+            Live Transcript
+          </span>
+        </div>
       </div>
       <div
         ref={ref}
-        className="flex-1 overflow-y-auto rounded-xl border border-gray-800 bg-black/40 p-4 space-y-3"
+        className="flex-1 overflow-y-auto bg-black p-4 space-y-3"
       >
         {conversation.map((m, idx) => (
           <div
             key={idx}
-            className={`px-3 py-2 rounded-lg text-sm ${
+            className={`border-2 p-3 text-sm ${
               m.role === "assistant"
-                ? "bg-blue-500/10 border border-blue-500/20 text-blue-100"
-                : "bg-gray-700/20 border border-gray-600/30 text-gray-100"
+                ? "border-white/20 bg-white/5"
+                : "border-white/10 bg-black"
             }`}
           >
-            <div className="text-[11px] opacity-70 mb-1">
+            <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-2">
               {m.role === "assistant" ? "AI Interviewer" : "You"}
             </div>
-            <div className="whitespace-pre-wrap">{m.content}</div>
+            <div className="whitespace-pre-wrap text-white/70 leading-relaxed">{m.content}</div>
           </div>
         ))}
         {interim && (
-          <div className="px-3 py-2 rounded-lg text-sm border border-green-400/30 bg-green-500/10 text-green-100">
-            <div className="text-[11px] opacity-70 mb-1">You (speaking...)</div>
-            <div className="whitespace-pre-wrap">{interim}</div>
+          <div className="border-2 border-green-500/50 p-3 text-sm bg-green-500/10">
+            <div className="text-[10px] font-mono text-green-500 uppercase tracking-widest mb-2">
+              You (speaking...)
+            </div>
+            <div className="whitespace-pre-wrap text-green-500/80">{interim}</div>
           </div>
         )}
         {processing && (
-          <div className="px-3 py-2 rounded-lg text-sm border border-blue-400/30 bg-blue-500/10 text-blue-100 flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-blue-400/70 animate-pulse" />
-            AI is thinking...
+          <div className="border-2 border-white/20 p-3 text-sm flex items-center gap-3">
+            <div className="w-3 h-3 border-2 border-white animate-pulse" />
+            <span className="font-mono text-white/70 uppercase tracking-wider text-xs">
+              AI is thinking...
+            </span>
           </div>
         )}
         {!processing && conversation.length === 0 && !interim && (
-          <div className="text-gray-400 text-sm text-center py-8">
-            Join the interview to start the conversation
+          <div className="text-white/40 text-sm text-center py-8 font-mono uppercase tracking-wider">
+            Join the interview to start
           </div>
         )}
       </div>
@@ -201,18 +199,18 @@ function ControlsBar({
       {!joined ? (
         <button
           onClick={onJoin}
-          className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-100 transition shadow-lg"
+          className="px-8 py-4 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <JoinIcon /> Join Interview
           </div>
         </button>
       ) : (
         <button
           onClick={onLeave}
-          className="px-5 py-3 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-lg"
+          className="px-8 py-4 border-2 border-red-500 bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all font-bold uppercase tracking-wider text-sm"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <PhoneHangIcon /> End Interview
           </div>
         </button>
@@ -625,34 +623,47 @@ export default function InterviewPage({
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <nav className="bg-black/90 border-b border-gray-800 sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-16 flex items-center justify-between">
-            <div className="text-xl font-bold tracking-tight">
+      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div className="text-2xl font-bold tracking-tight uppercase">
               AI Mock Interview
             </div>
             <button
               onClick={() => router.push("/dashboard")}
-              className="text-gray-400 hover:text-white px-4 py-2 text-sm font-medium transition border border-transparent hover:border-gray-600 rounded-lg"
+              className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all font-bold uppercase tracking-wider text-sm flex items-center gap-2"
             >
-              ← Dashboard
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              <span>Dashboard</span>
             </button>
           </div>
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
           {/* Main Stage */}
-          <div className="space-y-4">
-            <div className="relative rounded-3xl overflow-hidden border border-gray-800 bg-linear-to-br from-gray-900 to-black aspect-video">
+          <div className="space-y-6">
+            <div className="relative overflow-hidden border-2 border-white/10 bg-black aspect-video">
               {/* Main AI tile */}
               <AVTile
                 name="AI Interviewer"
                 initial="AI"
                 speaking={botSpeaking}
                 className="absolute inset-0"
-                accent="from-blue-900 to-purple-900"
+                accent=""
               />
 
               {/* User tile (picture-in-picture style) */}
@@ -662,18 +673,18 @@ export default function InterviewPage({
                   initial="U"
                   speaking={userSpeaking}
                   className="h-32 sm:h-36"
-                  accent="from-slate-700 to-slate-900"
+                  accent=""
                 />
               </div>
 
               {/* Status indicator */}
-              <div className="absolute top-6 left-6 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center gap-2">
+              <div className="absolute top-6 left-6 px-4 py-2 border-2 border-white/20 bg-black/80 flex items-center gap-3">
                 <div
-                  className={`w-2 h-2 rounded-full ${
-                    joined ? "bg-green-500 animate-pulse" : "bg-gray-500"
+                  className={`w-2 h-2 border-2 ${
+                    joined ? "border-green-500 bg-green-500 animate-pulse" : "border-white/30 bg-white/10"
                   }`}
                 />
-                <span className="text-xs text-white/90 font-medium">
+                <span className="text-xs font-mono uppercase tracking-wider">
                   {joined
                     ? botSpeaking
                       ? "AI Speaking"
@@ -685,7 +696,7 @@ export default function InterviewPage({
               </div>
 
               {/* Controls overlay */}
-              <div className="absolute left-0 right-0 bottom-0 px-6 py-5 flex items-center justify-center bg-linear-to-t from-black/60 to-transparent">
+              <div className="absolute left-0 right-0 bottom-0 px-6 py-6 flex items-center justify-center bg-black/60">
                 <ControlsBar
                   joined={joined}
                   onJoin={handleJoin}
@@ -695,10 +706,10 @@ export default function InterviewPage({
 
               {/* Processing overlay */}
               {processing && (
-                <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
-                  <div className="flex items-center gap-3 px-5 py-3 rounded-xl border border-blue-400/30 bg-blue-500/10">
-                    <div className="w-4 h-4 rounded-full bg-blue-400 animate-pulse" />
-                    <div className="text-sm text-white font-medium">
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center pointer-events-none">
+                  <div className="flex items-center gap-3 px-6 py-4 border-2 border-white/20 bg-black">
+                    <div className="w-4 h-4 border-2 border-white animate-pulse" />
+                    <div className="text-sm font-mono uppercase tracking-wider">
                       Processing...
                     </div>
                   </div>
@@ -708,94 +719,105 @@ export default function InterviewPage({
 
             {/* Pre-join instructions */}
             {!joined && (
-              <div className="px-4 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-100 text-sm">
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span className="font-medium">Before you join:</span>
-                  <span className="text-blue-200/70">
-                    • You'll need to allow microphone access. Use Chrome or Edge
-                    browser for best experience.
-                  </span>
+              <div className="border-2 border-white/20 p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 border-2 border-white/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="text-sm">
+                    <span className="font-bold uppercase tracking-wider block mb-1">
+                      Before you join:
+                    </span>
+                    <span className="text-white/70">
+                      You'll need to allow microphone access. Use Chrome or Edge
+                      browser for best experience.
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
 
             {/* Microphone permission prompt */}
             {joined && !micPermissionGranted && !error && (
-              <div className="px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-100 text-sm">
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5 animate-pulse"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                    />
-                  </svg>
-                  <span className="font-medium">
-                    Waiting for microphone access...
-                  </span>
-                  <span className="text-yellow-200/70">
-                    • Please click "Allow" when your browser asks for microphone
-                    permission
-                  </span>
+              <div className="border-2 border-yellow-500/50 p-4 bg-yellow-500/10">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 border-2 border-yellow-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg
+                      className="w-3 h-3 text-yellow-500 animate-pulse"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="text-sm">
+                    <span className="text-yellow-500 font-bold uppercase tracking-wider block mb-1">
+                      Waiting for microphone access
+                    </span>
+                    <span className="text-yellow-500/80">
+                      Please click "Allow" when your browser asks for permission
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
 
             {/* Live status message */}
             {joined && micPermissionGranted && !error && (
-              <div className="px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-100 text-sm">
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                  </svg>
-                  <span className="font-medium">Live conversation active</span>
-                  <span className="text-green-200/70">
-                    • Speak naturally, AI will respond when you finish
-                  </span>
+              <div className="border-2 border-green-500/50 p-4 bg-green-500/10">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 border-2 border-green-500 bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5 animate-pulse">
+                    <div className="w-2 h-2 bg-black" />
+                  </div>
+                  <div className="text-sm">
+                    <span className="text-green-500 font-bold uppercase tracking-wider block mb-1">
+                      Live conversation active
+                    </span>
+                    <span className="text-green-500/80">
+                      Speak naturally, AI will respond when you finish
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
 
             {error && (
-              <div className="px-4 py-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-200 text-sm">
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  {error}
+              <div className="border-2 border-red-500/50 p-4 bg-red-500/10">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 border-2 border-red-500 flex items-center justify-center flex-shrink-0">
+                    <svg
+                      className="w-3 h-3 text-red-500"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={3}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-red-500 text-sm">{error}</span>
                 </div>
               </div>
             )}

@@ -65,7 +65,7 @@ export class CDNPDFStrategy implements ParsingStrategy {
   /**
    * Single parsing attempt with timeout
    */
-  private async attemptParse(file: File, onProgress?: ProgressCallback, attempt: number): Promise<string> {
+  private async attemptParse(file: File, onProgress: ProgressCallback | undefined, attempt: number): Promise<string> {
     return new Promise(async (resolve, reject) => {
       const timeoutId = setTimeout(() => {
         reject(new Error(`PDF processing timed out after ${this.timeout / 1000} seconds`));

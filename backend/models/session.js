@@ -44,6 +44,9 @@ const sessionSchema = new mongoose.Schema(
       strengths: [{ type: String }],
       weaknesses: [{ type: String }],
       rating: { type: Number },
+      technicalScore: { type: Number },
+      problemSolvingScore: { type: Number },
+      communicationScore: { type: Number },
       suggestions: { type: String },
     },
 
