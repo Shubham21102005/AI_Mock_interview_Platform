@@ -327,6 +327,9 @@ export default function Dashboard() {
             {
               label: "Total Sessions",
               value: sessions.length,
+              color: "border-cyan-500/50 bg-cyan-500/10",
+              iconColor: "border-cyan-500 text-cyan-500",
+              textColor: "text-cyan-500",
               icon: (
                 <svg
                   className="w-6 h-6"
@@ -346,6 +349,9 @@ export default function Dashboard() {
             {
               label: "Completed",
               value: sessions.filter((s) => s.status === "completed").length,
+              color: "border-green-500/50 bg-green-500/10",
+              iconColor: "border-green-500 text-green-500",
+              textColor: "text-green-500",
               icon: (
                 <svg
                   className="w-6 h-6"
@@ -365,6 +371,9 @@ export default function Dashboard() {
             {
               label: "In Progress",
               value: sessions.filter((s) => s.status === "in-progress").length,
+              color: "border-yellow-500/50 bg-yellow-500/10",
+              iconColor: "border-yellow-500 text-yellow-500",
+              textColor: "text-yellow-500",
               icon: (
                 <svg
                   className="w-6 h-6"
@@ -382,16 +391,16 @@ export default function Dashboard() {
               ),
             },
           ].map((stat, index) => (
-            <div key={index} className="border-2 border-white/10 p-6">
+            <div key={index} className={`border-2 ${stat.color} p-6 hover:bg-opacity-20 transition-colors`}>
               <div className="flex items-center justify-between mb-4">
                 <p className="text-xs font-mono text-white/40 uppercase tracking-widest">
                   {stat.label}
                 </p>
-                <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center">
+                <div className={`w-10 h-10 border-2 ${stat.iconColor} flex items-center justify-center`}>
                   {stat.icon}
                 </div>
               </div>
-              <p className="text-5xl font-bold tracking-tighter">{stat.value}</p>
+              <p className={`text-5xl font-bold tracking-tighter ${stat.textColor}`}>{stat.value}</p>
             </div>
           ))}
         </div>
@@ -400,7 +409,7 @@ export default function Dashboard() {
         <div className="mb-12">
           <button
             onClick={navigateToCreateSession}
-            className="w-full py-6 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-lg flex items-center justify-center gap-4 group"
+            className="w-full py-6 bg-purple-600 border-2 border-purple-600 text-white hover:bg-purple-700 hover:border-purple-700 transition-all font-bold uppercase tracking-wider text-lg flex items-center justify-center gap-4 group"
           >
             <span>Create New Session</span>
             <svg

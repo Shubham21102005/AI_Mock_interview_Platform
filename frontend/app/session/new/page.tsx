@@ -392,8 +392,9 @@ export default function NewSession() {
         <div className="border-2 border-white/10">
           {/* Resume Section */}
           <div className="border-b-2 border-white/10 p-8">
-            <h3 className="text-2xl font-bold tracking-tight uppercase mb-6">
-              01. Resume
+            <h3 className="text-2xl font-bold tracking-tight uppercase mb-6 flex items-center gap-3">
+              <span className="text-cyan-500">01.</span>
+              <span>Resume</span>
             </h3>
 
             {/* PDF Upload Option */}
@@ -464,8 +465,9 @@ export default function NewSession() {
 
           {/* Job Details Section */}
           <div className="border-b-2 border-white/10 p-8">
-            <h3 className="text-2xl font-bold tracking-tight uppercase mb-6">
-              02. Job Details
+            <h3 className="text-2xl font-bold tracking-tight uppercase mb-6 flex items-center gap-3">
+              <span className="text-purple-500">02.</span>
+              <span>Job Details</span>
             </h3>
 
             <div className="space-y-6">
@@ -535,7 +537,7 @@ export default function NewSession() {
               <button
                 onClick={createSession}
                 disabled={loading || isParsingPdf}
-                className="px-8 py-3 bg-white text-black hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-bold uppercase tracking-wider text-sm"
+                className="px-8 py-3 bg-purple-600 border-2 border-purple-600 text-white hover:bg-purple-700 hover:border-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-bold uppercase tracking-wider text-sm"
               >
                 {loading ? "Creating..." : "Create Session"}
               </button>
@@ -551,11 +553,11 @@ export default function NewSession() {
             </h4>
           </div>
           <div className="grid md:grid-cols-3 divide-x-2 divide-white/10">
-            <div className="p-6">
-              <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center mb-4">
-                <span className="font-bold text-lg">1</span>
+            <div className="p-6 hover:bg-cyan-500/5 transition-colors">
+              <div className="w-10 h-10 border-2 border-cyan-500 bg-cyan-500/20 flex items-center justify-center mb-4">
+                <span className="font-bold text-lg text-cyan-500">1</span>
               </div>
-              <h5 className="text-lg font-bold uppercase tracking-tight mb-2">
+              <h5 className="text-lg font-bold uppercase tracking-tight mb-2 text-cyan-500">
                 Upload Resume
               </h5>
               <p className="text-white/60 text-sm leading-relaxed">
@@ -563,11 +565,11 @@ export default function NewSession() {
               </p>
             </div>
 
-            <div className="p-6">
-              <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center mb-4">
-                <span className="font-bold text-lg">2</span>
+            <div className="p-6 hover:bg-purple-500/5 transition-colors">
+              <div className="w-10 h-10 border-2 border-purple-500 bg-purple-500/20 flex items-center justify-center mb-4">
+                <span className="font-bold text-lg text-purple-500">2</span>
               </div>
-              <h5 className="text-lg font-bold uppercase tracking-tight mb-2">
+              <h5 className="text-lg font-bold uppercase tracking-tight mb-2 text-purple-500">
                 Provide Job Details
               </h5>
               <p className="text-white/60 text-sm leading-relaxed">
@@ -575,11 +577,11 @@ export default function NewSession() {
               </p>
             </div>
 
-            <div className="p-6">
-              <div className="w-10 h-10 border-2 border-white/30 flex items-center justify-center mb-4">
-                <span className="font-bold text-lg">3</span>
+            <div className="p-6 hover:bg-pink-500/5 transition-colors">
+              <div className="w-10 h-10 border-2 border-pink-500 bg-pink-500/20 flex items-center justify-center mb-4">
+                <span className="font-bold text-lg text-pink-500">3</span>
               </div>
-              <h5 className="text-lg font-bold uppercase tracking-tight mb-2">
+              <h5 className="text-lg font-bold uppercase tracking-tight mb-2 text-pink-500">
                 Start Interview
               </h5>
               <p className="text-white/60 text-sm leading-relaxed">

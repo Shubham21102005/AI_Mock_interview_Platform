@@ -662,7 +662,7 @@ export default function InterviewPage({
                 name="AI Interviewer"
                 initial="AI"
                 speaking={botSpeaking}
-                className="absolute inset-0"
+                className="absolute inset-0 bg-gradient-to-br from-purple-950/50 to-black"
                 accent=""
               />
 
@@ -672,7 +672,7 @@ export default function InterviewPage({
                   name="You"
                   initial="U"
                   speaking={userSpeaking}
-                  className="h-32 sm:h-36"
+                  className="h-32 sm:h-36 bg-gradient-to-br from-cyan-950/50 to-black"
                   accent=""
                 />
               </div>

@@ -281,7 +281,7 @@ export default function ProfilePage() {
           <div className="border-b-2 border-white/10 p-8">
             <div className="flex flex-col items-center">
               <div className="relative">
-                <div className="w-32 h-32 border-4 border-white/30 p-1 bg-white/5">
+                <div className="w-32 h-32 border-4 border-cyan-500/50 p-1 bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
                   {previewUrl ? (
                     <img
                       src={previewUrl}
@@ -290,16 +290,16 @@ export default function ProfilePage() {
                     />
                   ) : (
                     <div className="w-full h-full bg-black flex items-center justify-center">
-                      <User className="w-16 h-16 text-white/40" />
+                      <User className="w-16 h-16 text-cyan-500/60" />
                     </div>
                   )}
                 </div>
                 {isEditing && (
                   <label
                     htmlFor="profile-picture"
-                    className="absolute bottom-0 right-0 bg-white hover:bg-white/90 p-2 cursor-pointer transition-all"
+                    className="absolute bottom-0 right-0 bg-purple-600 hover:bg-purple-700 p-2 cursor-pointer transition-all border-2 border-purple-600"
                   >
-                    <Upload className="w-5 h-5 text-black" />
+                    <Upload className="w-5 h-5 text-white" />
                     <input
                       id="profile-picture"
                       type="file"
@@ -391,7 +391,7 @@ export default function ProfilePage() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="flex-1 px-8 py-4 bg-white text-black hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
+                  className="flex-1 px-8 py-4 bg-purple-600 border-2 border-purple-600 text-white hover:bg-purple-700 hover:border-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
                 >
                   <Save className="w-5 h-5" />
                   {saving ? "Saving..." : "Save Changes"}
@@ -408,7 +408,7 @@ export default function ProfilePage() {
             ) : (
               <button
                 onClick={() => setIsEditing(true)}
-                className="w-full px-8 py-4 bg-white text-black hover:bg-white/90 transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
+                className="w-full px-8 py-4 bg-cyan-600 border-2 border-cyan-600 text-white hover:bg-cyan-700 hover:border-cyan-700 transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
               >
                 <Edit2 className="w-5 h-5" />
                 Edit Profile
