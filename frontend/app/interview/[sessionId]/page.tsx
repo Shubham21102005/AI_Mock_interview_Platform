@@ -9,7 +9,7 @@ type Message = { role: Role; content: string; timestamp?: string };
 // Simple icons
 const PhoneHangIcon = () => (
   <svg
-    className="w-5 h-5 text-white"
+    className="w-5 h-5"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -24,7 +24,7 @@ const PhoneHangIcon = () => (
 );
 const JoinIcon = () => (
   <svg
-    className="w-5 h-5 text-black"
+    className="w-5 h-5"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -38,56 +38,73 @@ const JoinIcon = () => (
   </svg>
 );
 
-// AV tile with ripple ring animation
+// AV tile with enhanced ripple animation
 function AVTile({
   name,
   initial,
   speaking = false,
   className = "",
-  accent = "from-amber-900 to-amber-700",
 }: {
   name: string;
   initial: string;
   speaking?: boolean;
   className?: string;
-  accent?: string;
 }) {
   return (
-    <div className={`relative overflow-hidden border-2 border-white/20 bg-black ${className}`}>
+    <div className={`relative overflow-hidden border-2 border-[#e9ecef] bg-gradient-to-br from-[#f8f9fa] to-white ${className}`}>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-28 h-28 md:w-32 md:h-32 border-4 border-white/30 flex items-center justify-center bg-white/5">
-          <span className="text-white text-3xl md:text-4xl font-bold select-none">
-            {initial}
-          </span>
+        <div className="relative">
+          {/* Main avatar circle */}
+          <div className={`w-28 h-28 md:w-32 md:h-32 ${
+            speaking ? "bg-gradient-to-br from-[#f9b17a] to-[#e89b5f]" : "bg-gradient-to-br from-[#424769] to-[#676f9d]"
+          } rounded-full flex items-center justify-center shadow-lg transition-all duration-300`}>
+            <span className="text-white text-3xl md:text-4xl font-bold select-none">
+              {initial}
+            </span>
+          </div>
+
+          {/* Enhanced speaking animation with multiple ripples */}
           {speaking && (
             <>
-              <span className="absolute inset-0 border-4 border-white/30 animate-ping" />
-              <span className="absolute inset-0 border-4 border-white/20 animate-ping [animation-delay:200ms]" />
+              <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a] animate-ping opacity-75" />
+              <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a]/60 animate-ping [animation-delay:300ms] opacity-50" />
+              <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a]/40 animate-ping [animation-delay:600ms] opacity-25" />
+
+              {/* Pulsing glow effect */}
+              <span className="absolute inset-[-8px] rounded-full bg-[#f9b17a]/20 animate-pulse" />
             </>
           )}
         </div>
       </div>
-      <div className="absolute bottom-3 left-4 text-xs font-mono text-white/90 uppercase tracking-wider">
+
+      <div className="absolute bottom-4 left-4 text-xs font-medium text-[#2d3250] bg-white/90 px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
         {name}
       </div>
+
       <div
-        className={`absolute top-3 right-3 w-8 h-8 border-2 ${
-          speaking ? "border-green-500 bg-green-500/20" : "border-white/30 bg-white/10"
-        } flex items-center justify-center`}
+        className={`absolute top-4 right-4 w-10 h-10 rounded-full ${
+          speaking ? "bg-[#10b981] shadow-lg shadow-[#10b981]/50" : "bg-white border-2 border-[#e9ecef]"
+        } flex items-center justify-center transition-all duration-300`}
       >
         <svg
-          className={`w-4 h-4 ${speaking ? "text-green-500" : "text-white/60"}`}
+          className={`w-5 h-5 ${speaking ? "text-white" : "text-[#adb5bd]"}`}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth={2}
         >
           {speaking ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-            />
+            <>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+              />
+              {/* Animated sound waves */}
+              <circle cx="12" cy="8" r="1" className="animate-pulse" />
+              <circle cx="8" cy="8" r="1" className="animate-pulse [animation-delay:200ms]" />
+              <circle cx="16" cy="8" r="1" className="animate-pulse [animation-delay:400ms]" />
+            </>
           ) : (
             <path
               strokeLinecap="round"
@@ -115,13 +132,14 @@ function TranscriptPanel({
   useEffect(() => {
     if (ref.current) ref.current.scrollTop = ref.current.scrollHeight;
   }, [conversation, interim, processing]);
+
   return (
-    <div className="w-full h-full flex flex-col border-2 border-white/10">
-      <div className="border-b-2 border-white/10 p-4">
+    <div className="w-full h-full flex flex-col bg-white border-2 border-[#e9ecef] rounded-2xl overflow-hidden shadow-lg">
+      <div className="border-b-2 border-[#e9ecef] p-4 bg-gradient-to-r from-[#f8f9fa] to-white">
         <div className="flex items-center gap-3">
-          <div className="w-6 h-6 border-2 border-white/30 flex items-center justify-center">
+          <div className="w-8 h-8 bg-[#424769] rounded-lg flex items-center justify-center">
             <svg
-              className="w-3 h-3"
+              className="w-4 h-4 text-white"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -134,49 +152,64 @@ function TranscriptPanel({
               />
             </svg>
           </div>
-          <span className="font-bold uppercase tracking-tight text-sm">
+          <span className="font-bold text-[#2d3250] text-sm">
             Live Transcript
           </span>
         </div>
       </div>
+
       <div
         ref={ref}
-        className="flex-1 overflow-y-auto bg-black p-4 space-y-3"
+        className="flex-1 overflow-y-auto bg-gradient-to-br from-[#f8f9fa] to-white p-4 space-y-3"
       >
         {conversation.map((m, idx) => (
           <div
             key={idx}
-            className={`border-2 p-3 text-sm ${
+            className={`border-2 p-4 rounded-xl text-sm shadow-sm ${
               m.role === "assistant"
-                ? "border-white/20 bg-white/5"
-                : "border-white/10 bg-black"
+                ? "border-[#f9b17a] bg-[#f9b17a]/5"
+                : "border-[#e9ecef] bg-white"
             }`}
           >
-            <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-2">
-              {m.role === "assistant" ? "AI Interviewer" : "You"}
+            <div className="text-xs font-semibold text-[#676f9d] mb-2 flex items-center gap-2">
+              {m.role === "assistant" ? (
+                <>
+                  <div className="w-2 h-2 bg-[#f9b17a] rounded-full"></div>
+                  AI Interviewer
+                </>
+              ) : (
+                <>
+                  <div className="w-2 h-2 bg-[#424769] rounded-full"></div>
+                  You
+                </>
+              )}
             </div>
-            <div className="whitespace-pre-wrap text-white/70 leading-relaxed">{m.content}</div>
+            <div className="whitespace-pre-wrap text-[#2d3250] leading-relaxed">{m.content}</div>
           </div>
         ))}
+
         {interim && (
-          <div className="border-2 border-green-500/50 p-3 text-sm bg-green-500/10">
-            <div className="text-[10px] font-mono text-green-500 uppercase tracking-widest mb-2">
+          <div className="border-2 border-[#10b981] p-4 rounded-xl text-sm shadow-md bg-[#10b981]/5">
+            <div className="text-xs font-semibold text-[#10b981] mb-2 flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#10b981] rounded-full animate-pulse"></div>
               You (speaking...)
             </div>
-            <div className="whitespace-pre-wrap text-green-500/80">{interim}</div>
+            <div className="whitespace-pre-wrap text-[#10b981]">{interim}</div>
           </div>
         )}
+
         {processing && (
-          <div className="border-2 border-white/20 p-3 text-sm flex items-center gap-3">
-            <div className="w-3 h-3 border-2 border-white animate-pulse" />
-            <span className="font-mono text-white/70 uppercase tracking-wider text-xs">
+          <div className="border-2 border-[#f9b17a] p-4 rounded-xl text-sm flex items-center gap-3 shadow-md bg-[#f9b17a]/5">
+            <div className="w-3 h-3 bg-[#f9b17a] rounded-full animate-pulse" />
+            <span className="font-medium text-[#f9b17a]">
               AI is thinking...
             </span>
           </div>
         )}
+
         {!processing && conversation.length === 0 && !interim && (
-          <div className="text-white/40 text-sm text-center py-8 font-mono uppercase tracking-wider">
-            Join the interview to start
+          <div className="text-[#adb5bd] text-sm text-center py-12 font-medium">
+            Join the interview to start the conversation
           </div>
         )}
       </div>
@@ -199,7 +232,7 @@ function ControlsBar({
       {!joined ? (
         <button
           onClick={onJoin}
-          className="px-8 py-4 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
+          className="px-10 py-4 bg-[#10b981] text-white hover:bg-[#059669] transition-all font-semibold rounded-xl text-sm shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
         >
           <div className="flex items-center gap-3">
             <JoinIcon /> Join Interview
@@ -208,7 +241,7 @@ function ControlsBar({
       ) : (
         <button
           onClick={onLeave}
-          className="px-8 py-4 border-2 border-red-500 bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all font-bold uppercase tracking-wider text-sm"
+          className="px-10 py-4 bg-[#ef4444] text-white hover:bg-[#dc2626] transition-all font-semibold rounded-xl text-sm shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
         >
           <div className="flex items-center gap-3">
             <PhoneHangIcon /> End Interview
@@ -622,16 +655,33 @@ export default function InterviewPage({
     listeningRef.current && (interim.length > 0 || finalAnswer.length > 0);
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f9fa] to-white">
+      <nav className="border-b border-[#e9ecef] sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold tracking-tight uppercase">
-              AI Mock Interview
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#2d3250] rounded-xl flex items-center justify-center shadow-md">
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                  />
+                </svg>
+              </div>
+              <h1 className="text-xl font-bold text-[#2d3250]">
+                AI Mock Interview
+              </h1>
             </div>
             <button
               onClick={() => router.push("/dashboard")}
-              className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all font-bold uppercase tracking-wider text-sm flex items-center gap-2"
+              className="px-5 py-2 border-2 border-[#676f9d] hover:bg-[#676f9d] text-[#676f9d] hover:text-white transition-all font-medium rounded-lg text-sm flex items-center gap-2"
             >
               <svg
                 className="w-4 h-4"
@@ -653,17 +703,16 @@ export default function InterviewPage({
       </nav>
 
       <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-6">
           {/* Main Stage */}
           <div className="space-y-6">
-            <div className="relative overflow-hidden border-2 border-white/10 bg-black aspect-video">
+            <div className="relative overflow-hidden bg-white border-2 border-[#e9ecef] rounded-3xl aspect-video shadow-lg">
               {/* Main AI tile */}
               <AVTile
                 name="AI Interviewer"
                 initial="AI"
                 speaking={botSpeaking}
-                className="absolute inset-0 bg-gradient-to-br from-purple-950/50 to-black"
-                accent=""
+                className="absolute inset-0"
               />
 
               {/* User tile (picture-in-picture style) */}
@@ -672,19 +721,18 @@ export default function InterviewPage({
                   name="You"
                   initial="U"
                   speaking={userSpeaking}
-                  className="h-32 sm:h-36 bg-gradient-to-br from-cyan-950/50 to-black"
-                  accent=""
+                  className="h-32 sm:h-36 shadow-xl"
                 />
               </div>
 
               {/* Status indicator */}
-              <div className="absolute top-6 left-6 px-4 py-2 border-2 border-white/20 bg-black/80 flex items-center gap-3">
+              <div className="absolute top-6 left-6 px-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-[#e9ecef] rounded-full flex items-center gap-3 shadow-md">
                 <div
-                  className={`w-2 h-2 border-2 ${
-                    joined ? "border-green-500 bg-green-500 animate-pulse" : "border-white/30 bg-white/10"
+                  className={`w-2.5 h-2.5 rounded-full ${
+                    joined ? "bg-[#10b981] animate-pulse shadow-lg shadow-[#10b981]/50" : "bg-[#adb5bd]"
                   }`}
                 />
-                <span className="text-xs font-mono uppercase tracking-wider">
+                <span className="text-xs font-semibold text-[#2d3250]">
                   {joined
                     ? botSpeaking
                       ? "AI Speaking"
@@ -696,7 +744,7 @@ export default function InterviewPage({
               </div>
 
               {/* Controls overlay */}
-              <div className="absolute left-0 right-0 bottom-0 px-6 py-6 flex items-center justify-center bg-black/60">
+              <div className="absolute left-0 right-0 bottom-0 px-6 py-6 flex items-center justify-center bg-gradient-to-t from-black/20 to-transparent backdrop-blur-sm">
                 <ControlsBar
                   joined={joined}
                   onJoin={handleJoin}
@@ -706,10 +754,10 @@ export default function InterviewPage({
 
               {/* Processing overlay */}
               {processing && (
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center pointer-events-none">
-                  <div className="flex items-center gap-3 px-6 py-4 border-2 border-white/20 bg-black">
-                    <div className="w-4 h-4 border-2 border-white animate-pulse" />
-                    <div className="text-sm font-mono uppercase tracking-wider">
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+                  <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-[#f9b17a] rounded-xl shadow-lg">
+                    <div className="w-4 h-4 bg-[#f9b17a] rounded-full animate-pulse" />
+                    <div className="text-sm font-semibold text-[#f9b17a]">
                       Processing...
                     </div>
                   </div>
@@ -719,11 +767,11 @@ export default function InterviewPage({
 
             {/* Pre-join instructions */}
             {!joined && (
-              <div className="border-2 border-white/20 p-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 border-2 border-white/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="bg-white border-2 border-[#e9ecef] rounded-2xl p-6 shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-[#3b82f6] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                     <svg
-                      className="w-3 h-3"
+                      className="w-5 h-5 text-white"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -737,10 +785,10 @@ export default function InterviewPage({
                     </svg>
                   </div>
                   <div className="text-sm">
-                    <span className="font-bold uppercase tracking-wider block mb-1">
+                    <span className="font-bold text-[#2d3250] block mb-1">
                       Before you join:
                     </span>
-                    <span className="text-white/70">
+                    <span className="text-[#676f9d]">
                       You'll need to allow microphone access. Use Chrome or Edge
                       browser for best experience.
                     </span>
@@ -751,11 +799,11 @@ export default function InterviewPage({
 
             {/* Microphone permission prompt */}
             {joined && !micPermissionGranted && !error && (
-              <div className="border-2 border-yellow-500/50 p-4 bg-yellow-500/10">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 border-2 border-yellow-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="bg-[#f59e0b]/5 border-2 border-[#f59e0b] rounded-2xl p-6 shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-[#f59e0b] rounded-full flex items-center justify-center flex-shrink-0 shadow-md animate-pulse">
                     <svg
-                      className="w-3 h-3 text-yellow-500 animate-pulse"
+                      className="w-5 h-5 text-white"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -769,10 +817,10 @@ export default function InterviewPage({
                     </svg>
                   </div>
                   <div className="text-sm">
-                    <span className="text-yellow-500 font-bold uppercase tracking-wider block mb-1">
+                    <span className="text-[#f59e0b] font-bold block mb-1">
                       Waiting for microphone access
                     </span>
-                    <span className="text-yellow-500/80">
+                    <span className="text-[#f59e0b]">
                       Please click "Allow" when your browser asks for permission
                     </span>
                   </div>
@@ -782,16 +830,16 @@ export default function InterviewPage({
 
             {/* Live status message */}
             {joined && micPermissionGranted && !error && (
-              <div className="border-2 border-green-500/50 p-4 bg-green-500/10">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 border-2 border-green-500 bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5 animate-pulse">
-                    <div className="w-2 h-2 bg-black" />
+              <div className="bg-[#10b981]/5 border-2 border-[#10b981] rounded-2xl p-6 shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-[#10b981] rounded-full flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#10b981]/50 animate-pulse">
+                    <div className="w-3 h-3 bg-white rounded-full" />
                   </div>
                   <div className="text-sm">
-                    <span className="text-green-500 font-bold uppercase tracking-wider block mb-1">
+                    <span className="text-[#10b981] font-bold block mb-1">
                       Live conversation active
                     </span>
-                    <span className="text-green-500/80">
+                    <span className="text-[#10b981]">
                       Speak naturally, AI will respond when you finish
                     </span>
                   </div>
@@ -800,11 +848,11 @@ export default function InterviewPage({
             )}
 
             {error && (
-              <div className="border-2 border-red-500/50 p-4 bg-red-500/10">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 border-2 border-red-500 flex items-center justify-center flex-shrink-0">
+              <div className="bg-[#ef4444]/5 border-2 border-[#ef4444] rounded-2xl p-6 shadow-md">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-[#ef4444] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                     <svg
-                      className="w-3 h-3 text-red-500"
+                      className="w-5 h-5 text-white"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -817,7 +865,7 @@ export default function InterviewPage({
                       />
                     </svg>
                   </div>
-                  <span className="text-red-500 text-sm">{error}</span>
+                  <span className="text-[#ef4444] text-sm font-medium">{error}</span>
                 </div>
               </div>
             )}

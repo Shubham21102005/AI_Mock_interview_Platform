@@ -2,16 +2,16 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
+      <nav className="border-b border-gray-200 sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white flex items-center justify-center">
+                <div className="w-10 h-10 bg-[#2d3250] flex items-center justify-center rounded-xl shadow-md">
                   <svg
-                    className="w-5 h-5 text-black"
+                    className="w-6 h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -24,7 +24,7 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h1 className="text-xl font-bold text-white tracking-tight uppercase">
+                <h1 className="text-2xl font-bold text-[#2d3250]">
                   InterviewAI
                 </h1>
               </div>
@@ -33,19 +33,19 @@ export default function Home() {
               <div className="flex items-center gap-8">
                 <Link
                   href="#features"
-                  className="text-white/60 hover:text-white text-sm font-medium transition-colors uppercase tracking-wider"
+                  className="text-[#676f9d] hover:text-[#424769] text-sm font-medium transition-colors"
                 >
                   Features
                 </Link>
                 <Link
                   href="#how-it-works"
-                  className="text-white/60 hover:text-white text-sm font-medium transition-colors uppercase tracking-wider"
+                  className="text-[#676f9d] hover:text-[#424769] text-sm font-medium transition-colors"
                 >
                   How it Works
                 </Link>
                 <Link
                   href="#pricing"
-                  className="text-white/60 hover:text-white text-sm font-medium transition-colors uppercase tracking-wider"
+                  className="text-[#676f9d] hover:text-[#424769] text-sm font-medium transition-colors"
                 >
                   Pricing
                 </Link>
@@ -54,13 +54,13 @@ export default function Home() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="px-5 py-3 border-2 border-white/20 hover:border-white text-white text-sm font-medium transition-all uppercase tracking-wider"
+                className="px-6 py-2.5 border-2 border-[#676f9d] hover:border-[#424769] text-[#424769] hover:bg-[#f8f9fa] text-sm font-medium transition-all rounded-lg"
               >
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="px-5 py-3 bg-white text-black hover:bg-white/90 text-sm font-medium transition-all uppercase tracking-wider"
+                className="px-6 py-2.5 bg-[#f9b17a] hover:bg-[#e89b5f] text-white text-sm font-medium transition-all rounded-lg shadow-md hover:shadow-lg"
               >
                 Get Started
               </Link>
@@ -70,34 +70,37 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-32 lg:py-48">
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-[#f8f9fa] to-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="border-2 border-white/10 p-12 lg:p-20 relative">
-            <div className="absolute top-0 right-0 w-40 h-40 border-l-2 border-b-2 border-white/5"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 border-r-2 border-t-2 border-white/5"></div>
+          <div className="bg-white border-2 border-[#e9ecef] rounded-3xl p-12 lg:p-20 shadow-xl relative overflow-hidden">
+            {/* Decorative corners */}
+            <div className="absolute top-0 right-0 w-40 h-40 border-l-4 border-b-4 border-[#676f9d]/20 rounded-bl-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 border-r-4 border-t-4 border-[#f9b17a]/30 rounded-tr-3xl"></div>
 
-            <div className="text-center max-w-5xl mx-auto">
-              <div className="inline-flex items-center gap-3 px-4 py-2 border-2 border-white/20 mb-12">
-                <span className="w-2 h-2 bg-white"></span>
-                <span className="text-sm text-white/70 font-mono uppercase tracking-widest">
-                  Next-gen hiring platform
+            <div className="text-center max-w-5xl mx-auto relative z-10">
+              <div className="inline-flex items-center gap-2 px-5 py-2 bg-[#f9b17a]/10 border border-[#f9b17a]/30 rounded-full mb-8">
+                <span className="w-2 h-2 bg-[#f9b17a] rounded-full animate-pulse"></span>
+                <span className="text-sm text-[#424769] font-medium">
+                  Next-Generation Hiring Platform
                 </span>
               </div>
 
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 tracking-tighter leading-none">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#2d3250] mb-6 leading-tight">
                 INTERVIEW
-                <span className="block mt-2">INTELLIGENCE</span>
+                <span className="block mt-2 bg-gradient-to-r from-[#424769] via-[#676f9d] to-[#f9b17a] bg-clip-text text-transparent">
+                  INTELLIGENCE
+                </span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-white/60 mb-16 max-w-3xl mx-auto leading-relaxed">
-                AI-powered interviews that understand context, adapt in real-time,
-                and deliver actionable insights.
+              <p className="text-xl md:text-2xl text-[#676f9d] mb-12 max-w-3xl mx-auto leading-relaxed">
+                AI-powered interviews that understand context, adapt in
+                real-time, and deliver actionable insights.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/register"
-                  className="group px-10 py-5 bg-white text-black hover:bg-white/90 transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
+                  className="group px-10 py-4 bg-[#f9b17a] hover:bg-[#e89b5f] text-white transition-all flex items-center justify-center gap-3 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 duration-300"
                 >
                   <span>Start Building</span>
                   <svg
@@ -116,7 +119,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="#demo"
-                  className="group px-10 py-5 border-2 border-white/20 hover:border-white hover:bg-white/5 text-white transition-all flex items-center justify-center gap-3 font-bold uppercase tracking-wider"
+                  className="group px-10 py-4 border-2 border-[#424769] hover:bg-[#424769] text-[#424769] hover:text-white transition-all flex items-center justify-center gap-3 font-semibold rounded-xl"
                 >
                   <svg
                     className="w-5 h-5"
@@ -145,18 +148,21 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+      <section id="features" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
             <div className="inline-block mb-4">
-              <span className="text-sm text-gray-500 font-mono tracking-widest uppercase">
+              <span className="text-sm text-[#424769] font-medium bg-[#676f9d]/10 px-4 py-2 rounded-full border border-[#676f9d]/20">
                 Why It Matters
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 tracking-tight">
-              Built for <span className="text-gray-400">precision</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#2d3250] mb-6">
+              Built for{" "}
+              <span className="text-[#f9b17a]">
+                precision
+              </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
+            <p className="text-lg text-[#676f9d] max-w-2xl mx-auto leading-relaxed">
               Every feature designed to remove bias, save time, and surface the
               signal in the noise.
             </p>
@@ -169,53 +175,59 @@ export default function Home() {
                 description:
                   "AI that understands nuance and follows conversational threads like a human expert.",
                 icon: "💬",
+                gradient: "from-[#424769] to-[#676f9d]",
               },
               {
                 title: "Real-time Analytics",
                 description:
                   "Watch insights form as the conversation unfolds, not after it's over.",
                 icon: "📊",
+                gradient: "from-[#676f9d] to-[#f9b17a]",
               },
               {
                 title: "Bias Detection",
                 description:
                   "Automatically flag and neutralize unconscious bias in questioning and evaluation.",
                 icon: "⚖️",
+                gradient: "from-[#2d3250] to-[#424769]",
               },
               {
                 title: "Skill Mapping",
                 description:
                   "Connect responses to specific competencies and team needs with precision.",
                 icon: "🗺️",
+                gradient: "from-[#f9b17a] to-[#fcd4b1]",
               },
               {
                 title: "Candidate Experience",
                 description:
                   "Interviews that feel like conversations, not interrogations.",
                 icon: "✨",
+                gradient: "from-[#424769] to-[#f9b17a]",
               },
               {
                 title: "Enterprise Security",
                 description:
                   "End-to-end encryption and compliance built for the most demanding environments.",
                 icon: "🔒",
+                gradient: "from-[#2d3250] to-[#676f9d]",
               },
             ].map((feature, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black rounded-3xl transform group-hover:scale-105 transition-all duration-500"></div>
-                <div className="relative bg-black border border-gray-800 p-8 rounded-3xl h-full transform group-hover:-translate-y-2 transition-all duration-500 backdrop-blur-sm">
-                  <div className="text-3xl mb-6 transform group-hover:scale-110 transition-transform duration-500">
+              <div key={index} className="group">
+                <div className="relative bg-white border-2 border-[#e9ecef] hover:border-[#f9b17a] p-8 rounded-2xl h-full transform hover:-translate-y-2 transition-all duration-300 shadow-md hover:shadow-xl">
+                  <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${feature.gradient} opacity-5 rounded-bl-3xl`}></div>
+                  <div className="text-4xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">
+                  <h3 className="text-xl font-bold text-[#2d3250] mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 leading-relaxed font-light">
+                  <p className="text-[#676f9d] leading-relaxed">
                     {feature.description}
                   </p>
-                  <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <svg
-                      className="w-6 h-6 text-gray-600"
+                      className="w-6 h-6 text-[#f9b17a]"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -238,25 +250,28 @@ export default function Home() {
       {/* How It Works Section */}
       <section
         id="how-it-works"
-        className="py-24 bg-gradient-to-b from-black to-gray-900 relative"
+        className="py-24 bg-gradient-to-br from-[#f8f9fa] to-white"
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
             <div className="inline-block mb-4">
-              <span className="text-sm text-gray-500 font-mono tracking-widest uppercase">
+              <span className="text-sm text-[#424769] font-medium bg-[#f9b17a]/10 px-4 py-2 rounded-full border border-[#f9b17a]/30">
                 The Process
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 tracking-tight">
-              Simple <span className="text-gray-400">by design</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#2d3250] mb-6">
+              Simple{" "}
+              <span className="text-[#f9b17a]">
+                by design
+              </span>
             </h2>
           </div>
 
           <div className="relative">
             {/* Connecting line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-800 hidden lg:block"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#424769] via-[#676f9d] to-[#f9b17a] hidden lg:block opacity-20"></div>
 
-            <div className="space-y-12 lg:space-y-0">
+            <div className="space-y-16">
               {[
                 {
                   step: "01",
@@ -264,6 +279,7 @@ export default function Home() {
                   description:
                     "Upload job descriptions and set evaluation criteria. The AI learns what excellence looks like for this role.",
                   position: "left",
+                  color: "#424769",
                 },
                 {
                   step: "02",
@@ -271,6 +287,7 @@ export default function Home() {
                   description:
                     "AI conducts natural, adaptive conversations while analyzing responses in real-time across multiple dimensions.",
                   position: "right",
+                  color: "#676f9d",
                 },
                 {
                   step: "03",
@@ -278,6 +295,7 @@ export default function Home() {
                   description:
                     "Get detailed analysis, competency mapping, and hiring recommendations backed by data, not just intuition.",
                   position: "left",
+                  color: "#f9b17a",
                 },
               ].map((step, index) => (
                 <div
@@ -289,25 +307,28 @@ export default function Home() {
                   {/* Content */}
                   <div
                     className={`lg:w-1/2 ${
-                      step.position === "left" ? "lg:pr-12" : "lg:pl-12"
+                      step.position === "left" ? "lg:pr-16" : "lg:pl-16"
                     } mb-8 lg:mb-0`}
                   >
-                    <div className="bg-black border border-gray-800 p-8 rounded-3xl backdrop-blur-sm">
-                      <div className="text-sm text-gray-500 font-mono tracking-widest mb-4">
+                    <div className="bg-white border-2 border-[#e9ecef] hover:border-[#f9b17a] p-8 rounded-2xl hover:shadow-xl transition-all duration-300">
+                      <div className="text-sm text-[#676f9d] font-medium mb-3">
                         Step {step.step}
                       </div>
-                      <h3 className="text-3xl font-bold text-white mb-6 tracking-tight">
+                      <h3 className="text-2xl font-bold text-[#2d3250] mb-4">
                         {step.title}
                       </h3>
-                      <p className="text-gray-400 leading-relaxed font-light text-lg">
+                      <p className="text-[#676f9d] leading-relaxed text-base">
                         {step.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Step indicator */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-black border-2 border-gray-700 rounded-full flex items-center justify-center z-10">
-                    <span className="text-white font-bold text-sm">
+                  <div
+                    className="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full flex items-center justify-center z-10 shadow-lg border-4 border-white"
+                    style={{ backgroundColor: step.color }}
+                  >
+                    <span className="text-white font-bold text-lg">
                       {step.step}
                     </span>
                   </div>
@@ -319,28 +340,29 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-black"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <div className="inline-block mb-6">
-            <span className="text-sm text-gray-500 font-mono tracking-widest uppercase">
+            <span className="text-sm text-[#424769] font-medium bg-[#f9b17a]/10 px-4 py-2 rounded-full border border-[#f9b17a]/30">
               Ready to Begin?
             </span>
           </div>
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-bold text-[#2d3250] mb-6">
             Start building
-            <span className="block text-gray-400">your dream team</span>
+            <span className="block text-[#f9b17a]">
+              your dream team
+            </span>
           </h2>
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-lg text-[#676f9d] mb-10 max-w-2xl mx-auto leading-relaxed">
             Join forward-thinking companies that are redefining how talent is
             discovered and evaluated.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
             <Link
               href="/register"
-              className="group bg-white text-black hover:bg-gray-100 px-12 py-6 rounded-2xl text-xl font-semibold transition-all duration-500 transform hover:scale-105 hover:shadow-2xl flex items-center space-x-4 border-2 border-white"
+              className="group bg-[#f9b17a] text-white hover:bg-[#e89b5f] px-10 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center space-x-3 shadow-lg"
             >
-              <span className="tracking-wide">Create Account</span>
+              <span>Create Account</span>
               <svg
                 className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300"
                 fill="none"
@@ -357,7 +379,7 @@ export default function Home() {
             </Link>
             <Link
               href="/contact"
-              className="group border-2 border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 px-12 py-6 rounded-2xl text-xl font-semibold transition-all duration-500 hover:bg-gray-900/50 flex items-center space-x-4 backdrop-blur-sm"
+              className="group border-2 border-[#424769] text-[#424769] hover:bg-[#424769] hover:text-white px-10 py-4 rounded-xl text-lg font-semibold transition-all duration-300 flex items-center space-x-3"
             >
               <svg
                 className="w-6 h-6"
@@ -372,20 +394,20 @@ export default function Home() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              <span className="tracking-wide">Talk to Sales</span>
+              <span>Talk to Sales</span>
             </Link>
           </div>
-          <div className="mt-12 flex items-center justify-center space-x-8 text-gray-500 text-sm">
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[#676f9d] text-sm">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-[#f9b17a] rounded-full"></div>
               <span>No credit card required</span>
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-[#676f9d] rounded-full"></div>
               <span>14-day free trial</span>
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-[#424769] rounded-full"></div>
               <span>Enterprise-ready</span>
             </div>
           </div>
@@ -393,14 +415,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <footer className="bg-[#2d3250] py-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-[#f9b17a] rounded-xl flex items-center justify-center shadow-md">
                   <svg
-                    className="w-4 h-4 text-black"
+                    className="w-5 h-5 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -413,24 +435,24 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold text-white tracking-tight">
+                <h3 className="text-xl font-bold text-white">
                   InterviewAI
                 </h3>
               </div>
-              <p className="text-gray-400 leading-relaxed font-light max-w-xs">
+              <p className="text-[#adb5bd] leading-relaxed max-w-xs">
                 Building the future of talent discovery through intelligent
                 conversation.
               </p>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white mb-6 tracking-widest uppercase">
+              <h4 className="text-sm font-semibold text-white mb-6">
                 Product
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="#features"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Features
                   </Link>
@@ -438,7 +460,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#pricing"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Pricing
                   </Link>
@@ -446,7 +468,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="/demo"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Case Studies
                   </Link>
@@ -454,14 +476,14 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white mb-6 tracking-widest uppercase">
+              <h4 className="text-sm font-semibold text-white mb-6">
                 Company
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="/about"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     About
                   </Link>
@@ -469,7 +491,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="/contact"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Contact
                   </Link>
@@ -477,7 +499,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="/careers"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Careers
                   </Link>
@@ -485,14 +507,14 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white mb-6 tracking-widest uppercase">
+              <h4 className="text-sm font-semibold text-white mb-6">
                 Resources
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="/help"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Documentation
                   </Link>
@@ -500,7 +522,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="/blog"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Blog
                   </Link>
@@ -508,7 +530,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="/privacy"
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light"
+                    className="text-[#adb5bd] hover:text-[#f9b17a] transition-colors"
                   >
                     Privacy
                   </Link>
@@ -516,8 +538,8 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p className="text-gray-500 text-sm font-light">
+          <div className="border-t border-[#424769] mt-12 pt-8 text-center">
+            <p className="text-[#adb5bd] text-sm">
               &copy; 2024 InterviewAI. Crafted with precision.
             </p>
           </div>

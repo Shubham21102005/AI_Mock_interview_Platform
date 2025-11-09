@@ -97,11 +97,19 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center py-12 px-6 relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f9fa] to-white flex items-center justify-center py-12 px-6 relative overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, #2d3250 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
+
       {/* Back Button */}
       <Link
         href="/"
-        className="absolute top-8 left-8 p-3 border-2 border-white/20 hover:border-white hover:bg-white hover:text-black transition-all group"
+        className="absolute top-8 left-8 p-3 border-2 border-[#676f9d] bg-white hover:bg-[#f8f9fa] text-[#424769] rounded-lg transition-all group z-10 shadow-sm hover:shadow-md"
       >
         <svg
           className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
@@ -118,14 +126,18 @@ export default function Login() {
         </svg>
       </Link>
 
-      <div className="max-w-md w-full">
-        <div className="border-2 border-white/10 p-10">
+      <div className="max-w-md w-full relative z-10">
+        <div className="bg-white border-2 border-[#e9ecef] rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+          {/* Decorative Corners */}
+          <div className="absolute top-0 left-0 w-24 h-24 border-l-4 border-t-4 border-[#676f9d]/20 rounded-tl-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-24 h-24 border-r-4 border-b-4 border-[#f9b17a]/30 rounded-br-3xl"></div>
+
           {/* Header */}
-          <div className="mb-10">
+          <div className="mb-8 relative z-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 bg-white flex items-center justify-center">
+              <div className="w-12 h-12 bg-[#2d3250] flex items-center justify-center rounded-xl shadow-md">
                 <svg
-                  className="w-5 h-5 text-black"
+                  className="w-6 h-6 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -138,27 +150,27 @@ export default function Login() {
                   />
                 </svg>
               </div>
-              <h1 className="text-xl font-bold text-white tracking-tight uppercase">
+              <h1 className="text-2xl font-bold text-[#2d3250]">
                 InterviewAI
               </h1>
             </div>
 
-            <h2 className="text-4xl font-bold text-white mb-3 tracking-tighter uppercase">
-              Sign In
+            <h2 className="text-3xl font-bold text-[#2d3250] mb-2">
+              Welcome Back
             </h2>
-            <p className="text-white/60 leading-relaxed">
+            <p className="text-[#676f9d]">
               Continue your hiring journey
             </p>
           </div>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-5" onSubmit={handleSubmit}>
             {/* Success Message */}
             {successMessage && (
-              <div className="border-2 border-green-500/50 p-4">
+              <div className="border-2 border-[#10b981] bg-[#10b981]/5 p-4 rounded-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 border-2 border-green-500 flex items-center justify-center">
+                  <div className="w-5 h-5 bg-[#10b981] rounded-full flex items-center justify-center">
                     <svg
-                      className="w-3 h-3 text-green-500"
+                      className="w-3 h-3 text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -171,7 +183,7 @@ export default function Login() {
                       />
                     </svg>
                   </div>
-                  <p className="text-green-500 text-sm">{successMessage}</p>
+                  <p className="text-[#10b981] text-sm font-medium">{successMessage}</p>
                 </div>
               </div>
             )}
@@ -180,9 +192,9 @@ export default function Login() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest"
+                className="block text-sm font-medium text-[#424769] mb-2"
               >
-                Email
+                Email Address
               </label>
               <input
                 id="email"
@@ -191,13 +203,16 @@ export default function Login() {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`w-full px-4 py-4 bg-black border-2 ${
-                  errors.email ? "border-red-500/50" : "border-white/20"
-                } text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors`}
+                className={`w-full px-4 py-3 bg-white border-2 ${
+                  errors.email ? "border-[#ef4444] focus:border-[#ef4444]" : "border-[#e9ecef] focus:border-[#f9b17a]"
+                } text-[#2d3250] placeholder-[#adb5bd] rounded-xl focus:outline-none transition-all focus:ring-4 focus:ring-[#f9b17a]/10`}
                 placeholder="your@email.com"
               />
               {errors.email && (
-                <p className="mt-2 text-sm text-red-500 font-mono">{errors.email}</p>
+                <p className="mt-2 text-sm text-[#ef4444] flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-[#ef4444] rounded-full"></span>
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -205,7 +220,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-xs font-mono text-white/40 mb-2 uppercase tracking-widest"
+                className="block text-sm font-medium text-[#424769] mb-2"
               >
                 Password
               </label>
@@ -216,13 +231,16 @@ export default function Login() {
                 required
                 value={formData.password}
                 onChange={handleInputChange}
-                className={`w-full px-4 py-4 bg-black border-2 ${
-                  errors.password ? "border-red-500/50" : "border-white/20"
-                } text-white placeholder-white/30 focus:outline-none focus:border-white transition-colors`}
+                className={`w-full px-4 py-3 bg-white border-2 ${
+                  errors.password ? "border-[#ef4444] focus:border-[#ef4444]" : "border-[#e9ecef] focus:border-[#f9b17a]"
+                } text-[#2d3250] placeholder-[#adb5bd] rounded-xl focus:outline-none transition-all focus:ring-4 focus:ring-[#f9b17a]/10`}
                 placeholder="Enter your password"
               />
               {errors.password && (
-                <p className="mt-2 text-sm text-red-500 font-mono">{errors.password}</p>
+                <p className="mt-2 text-sm text-[#ef4444] flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-[#ef4444] rounded-full"></span>
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -230,7 +248,7 @@ export default function Login() {
             <div className="flex items-center justify-end">
               <Link
                 href="/forgot-password"
-                className="text-white/50 hover:text-white text-sm transition-colors uppercase font-mono tracking-wider"
+                className="text-[#676f9d] hover:text-[#424769] text-sm transition-colors font-medium"
               >
                 Forgot password?
               </Link>
@@ -238,11 +256,11 @@ export default function Login() {
 
             {/* General Error */}
             {errors.general && (
-              <div className="border-2 border-red-500/50 p-4">
+              <div className="border-2 border-[#ef4444] bg-[#ef4444]/5 p-4 rounded-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 border-2 border-red-500 flex items-center justify-center">
+                  <div className="w-5 h-5 bg-[#ef4444] rounded-full flex items-center justify-center">
                     <svg
-                      className="w-3 h-3 text-red-500"
+                      className="w-3 h-3 text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -255,7 +273,7 @@ export default function Login() {
                       />
                     </svg>
                   </div>
-                  <p className="text-red-500 text-sm">{errors.general}</p>
+                  <p className="text-[#ef4444] text-sm font-medium">{errors.general}</p>
                 </div>
               </div>
             )}
@@ -264,11 +282,11 @@ export default function Login() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-5 bg-white text-black hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-bold uppercase tracking-wider flex items-center justify-center gap-3"
+              className="w-full py-4 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all disabled:opacity-50 disabled:cursor-not-allowed font-semibold rounded-xl flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-[1.02] duration-200"
             >
               {isLoading ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-black border-t-transparent animate-spin"></div>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   <span>Signing in...</span>
                 </>
               ) : (
@@ -292,13 +310,13 @@ export default function Login() {
             </button>
 
             {/* Divider */}
-            <div className="relative">
+            <div className="relative py-4">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t-2 border-white/10"></div>
+                <div className="w-full border-t-2 border-[#e9ecef]"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-black text-white/40 font-mono uppercase tracking-widest">
-                  New Here?
+                <span className="px-4 bg-white text-[#676f9d] font-medium">
+                  New to InterviewAI?
                 </span>
               </div>
             </div>
@@ -306,11 +324,10 @@ export default function Login() {
             {/* Create Account Link */}
             <Link
               href="/register"
-              className="block w-full py-5 border-2 border-white/20 hover:border-white hover:bg-white/5 text-white text-center transition-all font-bold uppercase tracking-wider"
+              className="block w-full py-4 border-2 border-[#424769] hover:bg-[#424769] text-[#424769] hover:text-white text-center transition-all font-semibold rounded-xl"
             >
               Create Account
             </Link>
-
           </form>
         </div>
       </div>

@@ -195,11 +195,11 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="border-2 border-white/10 p-12">
+      <div className="min-h-screen bg-gradient-to-br from-[#f8f9fa] to-white flex items-center justify-center">
+        <div className="bg-white border-2 border-[#e9ecef] rounded-2xl p-12 shadow-xl">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-white/20 border-t-white mx-auto mb-6 animate-spin"></div>
-            <p className="text-xl font-mono uppercase tracking-wider text-white/60">
+            <div className="w-16 h-16 border-4 border-[#e9ecef] border-t-[#f9b17a] mx-auto mb-6 rounded-full animate-spin"></div>
+            <p className="text-lg font-medium text-[#676f9d]">
               Loading dashboard...
             </p>
           </div>
@@ -210,12 +210,12 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center p-6">
-        <div className="border-2 border-red-500/50 max-w-md w-full">
-          <div className="border-b-2 border-red-500/50 p-6 flex items-center gap-4">
-            <div className="w-12 h-12 border-2 border-red-500/50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#f8f9fa] to-white flex items-center justify-center p-6">
+        <div className="bg-white border-2 border-[#ef4444] max-w-md w-full rounded-2xl shadow-xl overflow-hidden">
+          <div className="border-b-2 border-[#ef4444] p-6 flex items-center gap-4 bg-[#ef4444]/5">
+            <div className="w-12 h-12 bg-[#ef4444] rounded-full flex items-center justify-center">
               <svg
-                className="w-6 h-6 text-red-500"
+                className="w-6 h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -228,13 +228,13 @@ export default function Dashboard() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold uppercase tracking-tight">Error</h2>
+            <h2 className="text-2xl font-bold text-[#2d3250]">Error</h2>
           </div>
           <div className="p-8">
-            <p className="text-white/70 mb-8 leading-relaxed">{error}</p>
+            <p className="text-[#676f9d] mb-8 leading-relaxed">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="w-full p-4 border-2 border-white hover:bg-white hover:text-black transition-all font-bold uppercase tracking-wider"
+              className="w-full py-3 bg-[#f9b17a] hover:bg-[#e89b5f] text-white transition-all font-semibold rounded-xl"
             >
               Try Again
             </button>
@@ -245,15 +245,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f9fa] to-white">
       {/* Navigation */}
-      <nav className="border-b-2 border-white/10 sticky top-0 z-50 bg-black">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+      <nav className="border-b border-[#e9ecef] sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-6">
-              <div className="w-10 h-10 bg-white flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#2d3250] rounded-xl flex items-center justify-center shadow-md">
                 <svg
-                  className="w-5 h-5 text-black"
+                  className="w-5 h-5 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -266,37 +266,37 @@ export default function Dashboard() {
                   />
                 </svg>
               </div>
-              <h1 className="text-xl font-bold tracking-tight uppercase">
+              <h1 className="text-xl font-bold text-[#2d3250]">
                 InterviewAI
               </h1>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {user && (
                 <Link
                   href="/profile"
-                  className="flex items-center gap-3 p-3 border-2 border-white/20 hover:border-white hover:bg-white/5 transition-all"
+                  className="flex items-center gap-3 px-4 py-2 border-2 border-[#e9ecef] hover:border-[#f9b17a] hover:bg-[#f9b17a]/5 transition-all rounded-lg"
                 >
                   {user.profilePicture ? (
                     <img
                       src={user.profilePicture}
                       alt={user.name}
-                      className="w-8 h-8 border-2 border-white/30"
+                      className="w-8 h-8 rounded-full border-2 border-[#f9b17a]"
                     />
                   ) : (
-                    <div className="w-8 h-8 bg-white flex items-center justify-center">
-                      <span className="text-black text-sm font-bold">
+                    <div className="w-8 h-8 bg-[#f9b17a] rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">
                         {user.name?.charAt(0).toUpperCase()}
                       </span>
                     </div>
                   )}
-                  <span className="text-white/70 font-mono text-sm uppercase tracking-wider">
+                  <span className="text-[#676f9d] font-medium text-sm">
                     {user.name}
                   </span>
                 </Link>
               )}
               <button
                 onClick={handleLogout}
-                className="px-6 py-3 border-2 border-white/20 hover:border-white hover:bg-white hover:text-black transition-all font-bold uppercase tracking-wider text-sm"
+                className="px-5 py-2 border-2 border-[#676f9d] hover:bg-[#676f9d] text-[#676f9d] hover:text-white transition-all font-medium rounded-lg text-sm"
               >
                 Logout
               </button>
@@ -308,28 +308,27 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Welcome Section */}
-        <div className="mb-12 border-2 border-white/10 p-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 border-l-2 border-b-2 border-white/5"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-32 border-r-2 border-t-2 border-white/5"></div>
+        <div className="mb-12 bg-white border-2 border-[#e9ecef] rounded-3xl p-12 shadow-lg relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 border-l-4 border-b-4 border-[#f9b17a]/20 rounded-bl-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 border-r-4 border-t-4 border-[#676f9d]/10 rounded-tr-3xl"></div>
           <div className="relative text-center">
-            <h2 className="text-5xl font-bold mb-4 tracking-tighter uppercase">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#2d3250]">
               Welcome back, {user?.name || "User"}
             </h2>
-            <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#676f9d] text-lg leading-relaxed max-w-2xl mx-auto">
               Ready to continue your journey toward better hiring decisions?
             </p>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {[
             {
               label: "Total Sessions",
               value: sessions.length,
-              color: "border-cyan-500/50 bg-cyan-500/10",
-              iconColor: "border-cyan-500 text-cyan-500",
-              textColor: "text-cyan-500",
+              color: "from-[#424769] to-[#676f9d]",
+              borderColor: "border-[#676f9d]/30",
               icon: (
                 <svg
                   className="w-6 h-6"
@@ -349,9 +348,8 @@ export default function Dashboard() {
             {
               label: "Completed",
               value: sessions.filter((s) => s.status === "completed").length,
-              color: "border-green-500/50 bg-green-500/10",
-              iconColor: "border-green-500 text-green-500",
-              textColor: "text-green-500",
+              color: "from-[#10b981] to-[#059669]",
+              borderColor: "border-[#10b981]/30",
               icon: (
                 <svg
                   className="w-6 h-6"
@@ -371,9 +369,8 @@ export default function Dashboard() {
             {
               label: "In Progress",
               value: sessions.filter((s) => s.status === "in-progress").length,
-              color: "border-yellow-500/50 bg-yellow-500/10",
-              iconColor: "border-yellow-500 text-yellow-500",
-              textColor: "text-yellow-500",
+              color: "from-[#f59e0b] to-[#d97706]",
+              borderColor: "border-[#f59e0b]/30",
               icon: (
                 <svg
                   className="w-6 h-6"
@@ -391,16 +388,16 @@ export default function Dashboard() {
               ),
             },
           ].map((stat, index) => (
-            <div key={index} className={`border-2 ${stat.color} p-6 hover:bg-opacity-20 transition-colors`}>
+            <div key={index} className={`bg-white border-2 ${stat.borderColor} rounded-2xl p-6 hover:shadow-lg transition-all`}>
               <div className="flex items-center justify-between mb-4">
-                <p className="text-xs font-mono text-white/40 uppercase tracking-widest">
+                <p className="text-sm font-medium text-[#676f9d]">
                   {stat.label}
                 </p>
-                <div className={`w-10 h-10 border-2 ${stat.iconColor} flex items-center justify-center`}>
+                <div className={`w-10 h-10 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center text-white shadow-md`}>
                   {stat.icon}
                 </div>
               </div>
-              <p className={`text-5xl font-bold tracking-tighter ${stat.textColor}`}>{stat.value}</p>
+              <p className="text-4xl font-bold text-[#2d3250]">{stat.value}</p>
             </div>
           ))}
         </div>
@@ -409,7 +406,7 @@ export default function Dashboard() {
         <div className="mb-12">
           <button
             onClick={navigateToCreateSession}
-            className="w-full py-6 bg-purple-600 border-2 border-purple-600 text-white hover:bg-purple-700 hover:border-purple-700 transition-all font-bold uppercase tracking-wider text-lg flex items-center justify-center gap-4 group"
+            className="w-full py-5 bg-[#f9b17a] border-2 border-[#f9b17a] text-white hover:bg-[#e89b5f] hover:border-[#e89b5f] transition-all font-semibold rounded-xl text-lg flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-[1.01] duration-200"
           >
             <span>Create New Session</span>
             <svg
@@ -430,20 +427,20 @@ export default function Dashboard() {
 
         {/* Sessions List */}
         <div>
-          <div className="border-b-2 border-white/10 pb-6 mb-8">
-            <h3 className="text-3xl font-bold tracking-tight uppercase mb-2">
+          <div className="mb-8">
+            <h3 className="text-3xl font-bold text-[#2d3250] mb-2">
               Your Interview Sessions
             </h3>
-            <p className="text-white/60">
+            <p className="text-[#676f9d]">
               Manage and track all your interview sessions
             </p>
           </div>
 
           {sessions.length === 0 ? (
-            <div className="border-2 border-white/10 p-16 text-center">
-              <div className="w-24 h-24 border-2 border-white/20 flex items-center justify-center mx-auto mb-8">
+            <div className="bg-white border-2 border-[#e9ecef] rounded-3xl p-16 text-center shadow-md">
+              <div className="w-24 h-24 bg-[#f8f9fa] rounded-2xl flex items-center justify-center mx-auto mb-8">
                 <svg
-                  className="w-12 h-12 text-white/40"
+                  className="w-12 h-12 text-[#adb5bd]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -456,16 +453,16 @@ export default function Dashboard() {
                   />
                 </svg>
               </div>
-              <h4 className="text-2xl font-bold uppercase tracking-tight mb-3">
+              <h4 className="text-2xl font-bold text-[#2d3250] mb-3">
                 No sessions yet
               </h4>
-              <p className="text-white/60 mb-8 max-w-sm mx-auto leading-relaxed">
+              <p className="text-[#676f9d] mb-8 max-w-sm mx-auto leading-relaxed">
                 Create your first interview session to get started with
                 AI-powered interviews.
               </p>
               <button
                 onClick={navigateToCreateSession}
-                className="px-8 py-4 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider"
+                className="px-8 py-4 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all font-semibold rounded-xl shadow-md hover:shadow-lg"
               >
                 Create First Session
               </button>
@@ -475,14 +472,14 @@ export default function Dashboard() {
               {sessions.map((session) => (
                 <div
                   key={session._id}
-                  className="border-2 border-white/10 p-6 hover:bg-white/5 transition-colors"
+                  className="bg-white border-2 border-[#e9ecef] rounded-2xl p-6 hover:shadow-lg transition-all"
                 >
                   <div className="flex justify-between items-start mb-6">
                     <div className="flex-1">
-                      <h4 className="text-2xl font-bold tracking-tight uppercase mb-3">
+                      <h4 className="text-2xl font-bold text-[#2d3250] mb-3">
                         {session.jobDetails.title || "Interview Session"}
                       </h4>
-                      <div className="flex items-center gap-6 text-xs font-mono text-white/40">
+                      <div className="flex items-center gap-6 text-sm text-[#676f9d]">
                         <span className="flex items-center gap-2">
                           <svg
                             className="w-4 h-4"
@@ -497,7 +494,7 @@ export default function Dashboard() {
                               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                           </svg>
-                          <span className="uppercase tracking-wider">
+                          <span>
                             {new Date(session.createdAt).toLocaleDateString()}
                           </span>
                         </span>
@@ -515,7 +512,7 @@ export default function Dashboard() {
                               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
                             />
                           </svg>
-                          <span className="uppercase tracking-wider">
+                          <span>
                             {session.currentQuestionCount || 0} Questions
                           </span>
                         </span>
@@ -523,33 +520,33 @@ export default function Dashboard() {
                     </div>
                     <div className="flex items-center gap-3">
                       <span
-                        className={`px-3 py-1 border-2 text-xs font-mono uppercase ${
+                        className={`px-3 py-1.5 border-2 text-xs font-medium rounded-lg ${
                           session.status === "completed"
-                            ? "border-green-500/50 text-green-500"
+                            ? "border-[#10b981] text-[#10b981] bg-[#10b981]/5"
                             : session.status === "in-progress"
-                            ? "border-yellow-500/50 text-yellow-500"
-                            : "border-white/30 text-white/60"
+                            ? "border-[#f59e0b] text-[#f59e0b] bg-[#f59e0b]/5"
+                            : "border-[#676f9d] text-[#676f9d] bg-[#676f9d]/5"
                         }`}
                       >
                         {session.status === "in-progress"
                           ? "In Progress"
-                          : session.status}
+                          : session.status.charAt(0).toUpperCase() + session.status.slice(1)}
                       </span>
                     </div>
                   </div>
 
                   <div className="mb-6 space-y-3">
                     {session.jobDetails.description && (
-                      <p className="text-white/70 text-sm leading-relaxed">
-                        <span className="text-white/40 font-mono uppercase tracking-wider text-xs">
+                      <p className="text-[#676f9d] text-sm leading-relaxed">
+                        <span className="text-[#424769] font-medium">
                           Description:
                         </span>{" "}
                         {session.jobDetails.description}
                       </p>
                     )}
                     {session.jobDetails.yoeRequired && (
-                      <p className="text-white/70 text-sm">
-                        <span className="text-white/40 font-mono uppercase tracking-wider text-xs">
+                      <p className="text-[#676f9d] text-sm">
+                        <span className="text-[#424769] font-medium">
                           Experience:
                         </span>{" "}
                         {session.jobDetails.yoeRequired}
@@ -558,11 +555,11 @@ export default function Dashboard() {
                   </div>
 
                   {session.status === "completed" && session.feedback && (
-                    <div className="mb-6 border-2 border-green-500/30 p-6">
-                      <h5 className="text-sm font-mono text-white/40 uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <div className="w-5 h-5 border-2 border-green-500 flex items-center justify-center">
+                    <div className="mb-6 border-2 border-[#10b981] bg-[#10b981]/5 rounded-xl p-6">
+                      <h5 className="text-sm font-medium text-[#10b981] mb-4 flex items-center gap-2">
+                        <div className="w-5 h-5 bg-[#10b981] rounded-full flex items-center justify-center">
                           <svg
-                            className="w-3 h-3 text-green-500"
+                            className="w-3 h-3 text-white"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -579,14 +576,14 @@ export default function Dashboard() {
                       </h5>
                       <div className="grid md:grid-cols-2 gap-4 text-sm">
                         <div className="space-y-2">
-                          <p className="text-white/70">
-                            <span className="text-white/40 font-mono">
+                          <p className="text-[#676f9d]">
+                            <span className="text-[#424769] font-medium">
                               Overall:
                             </span>{" "}
                             {session.feedback.overall}
                           </p>
-                          <p className="text-white/70">
-                            <span className="text-white/40 font-mono">
+                          <p className="text-[#676f9d]">
+                            <span className="text-[#424769] font-medium">
                               Rating:
                             </span>{" "}
                             {session.feedback.rating}/10
@@ -594,8 +591,8 @@ export default function Dashboard() {
                         </div>
                         {session.feedback.strengths.length > 0 && (
                           <div>
-                            <p className="text-white/70">
-                              <span className="text-white/40 font-mono">
+                            <p className="text-[#676f9d]">
+                              <span className="text-[#424769] font-medium">
                                 Strengths:
                               </span>{" "}
                               {session.feedback.strengths.join(", ")}
@@ -606,15 +603,15 @@ export default function Dashboard() {
                     </div>
                   )}
 
-                  <div className="flex justify-between items-center border-t-2 border-white/10 pt-6">
-                    <div className="text-xs font-mono text-white/40 uppercase tracking-wider">
+                  <div className="flex justify-between items-center border-t-2 border-[#e9ecef] pt-6">
+                    <div className="text-sm text-[#adb5bd]">
                       Updated: {new Date(session.updatedAt).toLocaleDateString()}
                     </div>
                     <div className="flex gap-3">
                       {session.status === "pending" && (
                         <button
                           onClick={() => startInterview(session._id)}
-                          className="px-6 py-3 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
+                          className="px-6 py-2.5 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all font-semibold rounded-lg text-sm shadow-md hover:shadow-lg"
                         >
                           Start Interview
                         </button>
@@ -622,7 +619,7 @@ export default function Dashboard() {
                       {session.status === "in-progress" && (
                         <Link
                           href={`/interview/${session._id}`}
-                          className="px-6 py-3 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
+                          className="px-6 py-2.5 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all font-semibold rounded-lg text-sm shadow-md hover:shadow-lg"
                         >
                           Continue
                         </Link>
@@ -630,14 +627,14 @@ export default function Dashboard() {
                       {session.status === "completed" && (
                         <Link
                           href={`/feedback/${session._id}`}
-                          className="px-6 py-3 bg-white text-black hover:bg-white/90 transition-all font-bold uppercase tracking-wider text-sm"
+                          className="px-6 py-2.5 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all font-semibold rounded-lg text-sm shadow-md hover:shadow-lg"
                         >
                           View Feedback
                         </Link>
                       )}
                       <button
                         onClick={() => deleteSession(session._id)}
-                        className="px-6 py-3 border-2 border-red-500/50 text-red-500 hover:bg-red-500/10 hover:border-red-400 transition-all font-bold uppercase tracking-wider text-sm"
+                        className="px-6 py-2.5 border-2 border-[#ef4444] text-[#ef4444] hover:bg-[#ef4444] hover:text-white transition-all font-semibold rounded-lg text-sm"
                       >
                         Delete
                       </button>
