@@ -2,121 +2,10 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Mic, MicOff, Phone, Video } from "lucide-react";
 
 type Role = "user" | "assistant" | "system";
 type Message = { role: Role; content: string; timestamp?: string };
-
-// Simple icons
-const PhoneHangIcon = () => (
-  <svg
-    className="w-5 h-5"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-    />
-  </svg>
-);
-const JoinIcon = () => (
-  <svg
-    className="w-5 h-5"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-    />
-  </svg>
-);
-
-// AV tile with enhanced ripple animation
-function AVTile({
-  name,
-  initial,
-  speaking = false,
-  className = "",
-}: {
-  name: string;
-  initial: string;
-  speaking?: boolean;
-  className?: string;
-}) {
-  return (
-    <div className={`relative overflow-hidden border-2 border-[#e9ecef] bg-gradient-to-br from-[#f8f9fa] to-white ${className}`}>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative">
-          {/* Main avatar circle */}
-          <div className={`w-28 h-28 md:w-32 md:h-32 ${
-            speaking ? "bg-gradient-to-br from-[#f9b17a] to-[#e89b5f]" : "bg-gradient-to-br from-[#424769] to-[#676f9d]"
-          } rounded-full flex items-center justify-center shadow-lg transition-all duration-300`}>
-            <span className="text-white text-3xl md:text-4xl font-bold select-none">
-              {initial}
-            </span>
-          </div>
-
-          {/* Enhanced speaking animation with multiple ripples */}
-          {speaking && (
-            <>
-              <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a] animate-ping opacity-75" />
-              <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a]/60 animate-ping [animation-delay:300ms] opacity-50" />
-              <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a]/40 animate-ping [animation-delay:600ms] opacity-25" />
-
-              {/* Pulsing glow effect */}
-              <span className="absolute inset-[-8px] rounded-full bg-[#f9b17a]/20 animate-pulse" />
-            </>
-          )}
-        </div>
-      </div>
-
-      <div className="absolute bottom-4 left-4 text-xs font-medium text-[#2d3250] bg-white/90 px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
-        {name}
-      </div>
-
-      <div
-        className={`absolute top-4 right-4 w-10 h-10 rounded-full ${
-          speaking ? "bg-[#10b981] shadow-lg shadow-[#10b981]/50" : "bg-white border-2 border-[#e9ecef]"
-        } flex items-center justify-center transition-all duration-300`}
-      >
-        <svg
-          className={`w-5 h-5 ${speaking ? "text-white" : "text-[#adb5bd]"}`}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          {speaking ? (
-            <>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-              />
-              {/* Animated sound waves */}
-              <circle cx="12" cy="8" r="1" className="animate-pulse" />
-              <circle cx="8" cy="8" r="1" className="animate-pulse [animation-delay:200ms]" />
-              <circle cx="16" cy="8" r="1" className="animate-pulse [animation-delay:400ms]" />
-            </>
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
-            />
-          )}
-        </svg>
-      </div>
-    </div>
-  );
-}
 
 // Transcript panel
 function TranscriptPanel({
@@ -217,41 +106,6 @@ function TranscriptPanel({
   );
 }
 
-// Simplified controls
-function ControlsBar({
-  joined,
-  onJoin,
-  onLeave,
-}: {
-  joined: boolean;
-  onJoin: () => void;
-  onLeave: () => void;
-}) {
-  return (
-    <div className="flex items-center gap-3">
-      {!joined ? (
-        <button
-          onClick={onJoin}
-          className="px-10 py-4 bg-[#10b981] text-white hover:bg-[#059669] transition-all font-semibold rounded-xl text-sm shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
-        >
-          <div className="flex items-center gap-3">
-            <JoinIcon /> Join Interview
-          </div>
-        </button>
-      ) : (
-        <button
-          onClick={onLeave}
-          className="px-10 py-4 bg-[#ef4444] text-white hover:bg-[#dc2626] transition-all font-semibold rounded-xl text-sm shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
-        >
-          <div className="flex items-center gap-3">
-            <PhoneHangIcon /> End Interview
-          </div>
-        </button>
-      )}
-    </div>
-  );
-}
-
 export default function InterviewPage({
   params,
 }: {
@@ -345,7 +199,6 @@ export default function InterviewPage({
     utter.pitch = 1.0;
     utter.onend = () => {
       speakingRef.current = false;
-      // Auto-resume listening after AI finishes speaking
       if (joinedRef.current) {
         setTimeout(() => {
           listeningRef.current = true;
@@ -392,7 +245,6 @@ export default function InterviewPage({
       setFinalAnswer(finalText);
       finalAnswerRef.current = finalText;
 
-      // Auto-submit after user stops speaking (silence detection)
       if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
       if (finalText && !isProcessingRef.current) {
         autoSubmitTimerRef.current = setTimeout(() => {
@@ -403,7 +255,7 @@ export default function InterviewPage({
           ) {
             submitAnswer();
           }
-        }, 1500); // Wait 1.5s of silence before auto-submitting
+        }, 1500);
       }
     };
 
@@ -482,7 +334,6 @@ export default function InterviewPage({
         speak(q);
       }
     } catch (e: any) {
-      // If already started, gracefully recover by loading current conversation
       const session = await getSession();
       if (session && session.status === "in-progress") {
         await loadConversation();
@@ -540,7 +391,6 @@ export default function InterviewPage({
         speak(
           "The interview is completed. Thank you for your time. Redirecting to feedback page...",
           () => {
-            // Redirect to feedback page after speech ends
             setTimeout(() => {
               router.push(`/feedback/${sessionId}`);
             }, 1000);
@@ -557,7 +407,6 @@ export default function InterviewPage({
       }
     } catch (e: any) {
       setError(e?.message || "Failed to submit answer");
-      // Resume listening even on error
       if (joined && !speakingRef.current) {
         setTimeout(() => startListening(), 500);
       }
@@ -571,7 +420,6 @@ export default function InterviewPage({
     setJoined(true);
     joinedRef.current = true;
 
-    // Initialize speech recognition immediately on user gesture
     if (!recognitionRef.current) {
       const recog = initRecognition();
       if (!recog) {
@@ -582,7 +430,6 @@ export default function InterviewPage({
       }
     }
 
-    // Try to start listening immediately to trigger permission prompt
     try {
       const recog = recognitionRef.current;
       if (recog) {
@@ -629,26 +476,21 @@ export default function InterviewPage({
   };
 
   useEffect(() => {
-    // Preload conversation
     (async () => {
       await loadConversation();
     })();
 
-    // Cleanup on unmount
     return () => {
       stopListening();
       if (synth) synth.cancel();
       if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
 
-  // Sync ref with state
   useEffect(() => {
     finalAnswerRef.current = finalAnswer;
   }, [finalAnswer]);
 
-  // Derive UI states
   const processing = loading;
   const botSpeaking = speakingRef.current || processing;
   const userSpeaking =
@@ -706,27 +548,56 @@ export default function InterviewPage({
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-6">
           {/* Main Stage */}
           <div className="space-y-6">
-            <div className="relative overflow-hidden bg-white border-2 border-[#e9ecef] rounded-3xl aspect-video shadow-lg">
-              {/* Main AI tile */}
-              <AVTile
-                name="AI Interviewer"
-                initial="AI"
-                speaking={botSpeaking}
-                className="absolute inset-0"
-              />
+            <div className="relative bg-white border-2 border-[#e9ecef] rounded-3xl aspect-video shadow-lg overflow-hidden">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#f8f9fa] via-white to-[#f8f9fa]"></div>
 
-              {/* User tile (picture-in-picture style) */}
-              <div className="absolute bottom-6 right-6 w-56 sm:w-64">
-                <AVTile
-                  name="You"
-                  initial="U"
-                  speaking={userSpeaking}
-                  className="h-32 sm:h-36 shadow-xl"
-                />
+              {/* Center Icon with Ripples */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative">
+                  {/* Main Icon */}
+                  <div
+                    className={`w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center transition-all duration-500 ${
+                      botSpeaking
+                        ? "bg-gradient-to-br from-[#f9b17a] to-[#e89b5f] shadow-2xl shadow-[#f9b17a]/50"
+                        : userSpeaking
+                        ? "bg-gradient-to-br from-[#10b981] to-[#059669] shadow-2xl shadow-[#10b981]/50"
+                        : "bg-gradient-to-br from-[#424769] to-[#676f9d] shadow-xl"
+                    }`}
+                  >
+                    {botSpeaking ? (
+                      <Mic className="w-16 h-16 md:w-20 md:h-20 text-white" />
+                    ) : userSpeaking ? (
+                      <Mic className="w-16 h-16 md:w-20 md:h-20 text-white animate-pulse" />
+                    ) : (
+                      <MicOff className="w-16 h-16 md:w-20 md:h-20 text-white opacity-60" />
+                    )}
+                  </div>
+
+                  {/* Ripple Effects when AI is speaking */}
+                  {botSpeaking && (
+                    <>
+                      <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a] animate-ping opacity-75" />
+                      <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a]/60 animate-ping opacity-50" style={{ animationDelay: "300ms" }} />
+                      <span className="absolute inset-0 rounded-full border-4 border-[#f9b17a]/40 animate-ping opacity-25" style={{ animationDelay: "600ms" }} />
+                      <span className="absolute inset-[-20px] rounded-full bg-[#f9b17a]/10 animate-pulse" />
+                      <span className="absolute inset-[-40px] rounded-full bg-[#f9b17a]/5 animate-pulse" style={{ animationDelay: "500ms" }} />
+                    </>
+                  )}
+
+                  {/* Ripple Effects when User is speaking */}
+                  {userSpeaking && !botSpeaking && (
+                    <>
+                      <span className="absolute inset-0 rounded-full border-4 border-[#10b981] animate-ping opacity-75" />
+                      <span className="absolute inset-0 rounded-full border-4 border-[#10b981]/60 animate-ping opacity-50" style={{ animationDelay: "300ms" }} />
+                      <span className="absolute inset-[-20px] rounded-full bg-[#10b981]/10 animate-pulse" />
+                    </>
+                  )}
+                </div>
               </div>
 
               {/* Status indicator */}
-              <div className="absolute top-6 left-6 px-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-[#e9ecef] rounded-full flex items-center gap-3 shadow-md">
+              <div className="absolute top-6 left-6 px-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-[#e9ecef] rounded-full flex items-center gap-3 shadow-md z-10">
                 <div
                   className={`w-2.5 h-2.5 rounded-full ${
                     joined ? "bg-[#10b981] animate-pulse shadow-lg shadow-[#10b981]/50" : "bg-[#adb5bd]"
@@ -743,18 +614,30 @@ export default function InterviewPage({
                 </span>
               </div>
 
-              {/* Controls overlay */}
-              <div className="absolute left-0 right-0 bottom-0 px-6 py-6 flex items-center justify-center bg-gradient-to-t from-black/20 to-transparent backdrop-blur-sm">
-                <ControlsBar
-                  joined={joined}
-                  onJoin={handleJoin}
-                  onLeave={handleLeave}
-                />
+              {/* Controls - Repositioned to bottom right, no blur */}
+              <div className="absolute bottom-6 right-6 z-10">
+                {!joined ? (
+                  <button
+                    onClick={handleJoin}
+                    className="px-8 py-4 bg-[#10b981] text-white hover:bg-[#059669] transition-all font-semibold rounded-xl text-sm shadow-xl hover:shadow-2xl transform hover:scale-105 duration-200 flex items-center gap-3"
+                  >
+                    <Video className="w-5 h-5" />
+                    <span>Join Interview</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleLeave}
+                    className="px-8 py-4 bg-[#ef4444] text-white hover:bg-[#dc2626] transition-all font-semibold rounded-xl text-sm shadow-xl hover:shadow-2xl transform hover:scale-105 duration-200 flex items-center gap-3"
+                  >
+                    <Phone className="w-5 h-5" />
+                    <span>End Interview</span>
+                  </button>
+                )}
               </div>
 
               {/* Processing overlay */}
               {processing && (
-                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center pointer-events-none z-20">
                   <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-[#f9b17a] rounded-xl shadow-lg">
                     <div className="w-4 h-4 bg-[#f9b17a] rounded-full animate-pulse" />
                     <div className="text-sm font-semibold text-[#f9b17a]">
