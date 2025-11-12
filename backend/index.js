@@ -11,9 +11,21 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
+// Debug middleware - log all requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
 //Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/sessions", sessionRoutes);
+
+// 404 handler - log unmatched routes
+app.use((req, res) => {
+  console.log(`404 Not Found: ${req.method} ${req.url}`);
+  res.status(404).json({ message: "Route not found" });
+});
 
 app.listen(process.env.PORT, async () => {
   try {

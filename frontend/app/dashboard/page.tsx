@@ -158,6 +158,29 @@ export default function Dashboard() {
     }
   };
 
+  // Retake interview
+  const retakeInterview = async (sessionId: string) => {
+    if (!confirm("Are you sure you want to retake this interview? All feedback and conversation history will be cleared.")) {
+      return;
+    }
+
+    try {
+      const result = await apiCall(`/sessions/${sessionId}/retake`, {
+        method: "POST",
+      });
+
+      if (result) {
+        // Reload sessions to get updated status
+        await loadSessions();
+        // Navigate to interview page
+        router.push(`/interview/${sessionId}`);
+      }
+    } catch (err) {
+      console.error("Failed to retake interview:", err);
+      setError("Failed to retake interview");
+    }
+  };
+
   // Logout
   const handleLogout = async () => {
     try {
@@ -625,12 +648,20 @@ export default function Dashboard() {
                         </Link>
                       )}
                       {session.status === "completed" && (
-                        <Link
-                          href={`/feedback/${session._id}`}
-                          className="px-6 py-2.5 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all font-semibold rounded-lg text-sm shadow-md hover:shadow-lg"
-                        >
-                          View Feedback
-                        </Link>
+                        <>
+                          <Link
+                            href={`/feedback/${session._id}`}
+                            className="px-6 py-2.5 bg-[#f9b17a] text-white hover:bg-[#e89b5f] transition-all font-semibold rounded-lg text-sm shadow-md hover:shadow-lg"
+                          >
+                            View Feedback
+                          </Link>
+                          <button
+                            onClick={() => retakeInterview(session._id)}
+                            className="px-6 py-2.5 border-2 border-[#10b981] text-[#10b981] hover:bg-[#10b981] hover:text-white transition-all font-semibold rounded-lg text-sm"
+                          >
+                            Retake
+                          </button>
+                        </>
                       )}
                       <button
                         onClick={() => deleteSession(session._id)}

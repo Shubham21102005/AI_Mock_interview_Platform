@@ -92,11 +92,11 @@ const getAllSessions = async (req, res) => {
 
 const deleteSession = async (req, res) => {
   try {
-    const { sessionid } = req.params;
+    const { sessionId } = req.params;
     const userId = req.user?.userId;
     if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
-    const session = await Session.findByIdAndDelete(sessionid);
+    const session = await Session.findByIdAndDelete(sessionId);
     if (!session) return res.status(404).json({ message: "Session not found" });
 
     // remove reference from user's sessions
@@ -210,6 +210,45 @@ const getConversation = async (req, res) => {
   }
 };
 
+const retakeInterview = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    const session = await Session.findById(sessionId);
+    if (!session) return res.status(404).json({ message: "Session not found" });
+
+    // Clear conversation history
+    session.conversation = [];
+
+    // Clear feedback
+    session.feedback = {
+      overall: "",
+      strengths: [],
+      weaknesses: [],
+      rating: 0,
+      technicalScore: 0,
+      problemSolvingScore: 0,
+      communicationScore: 0,
+      suggestions: ""
+    };
+
+    // Reset status to pending
+    session.status = "pending";
+
+    // Reset question count
+    session.currentQuestionCount = 0;
+
+    await session.save();
+
+    res.status(200).json({
+      message: "Session reset successfully for retake",
+      session
+    });
+  } catch (error) {
+    console.error("retakeInterview error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   createSession,
   getSession,
@@ -219,4 +258,5 @@ module.exports = {
   startInterview,
   respondToQuestion,
   getConversation,
+  retakeInterview,
 };

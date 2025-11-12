@@ -11,6 +11,7 @@ const {
   startInterview,
   respondToQuestion,
   getConversation,
+  retakeInterview,
 } = require("../controllers/sessionControllers.js");
 const protect = require("../middleware/authMiddleware.js"); // JWT middleware
 
@@ -31,7 +32,7 @@ router.get("/:sessionId", protect, getSession);
 router.put("/:sessionId/status", protect, updateSessionStatus);
 
 // Delete a session
-router.delete("/:sessionid", protect, deleteSession);
+router.delete("/:sessionId", protect, deleteSession);
 
 // ==================
 // AI Interview Flow Endpoints
@@ -45,5 +46,8 @@ router.post("/:sessionId/respond", protect, respondToQuestion);
 
 // Get full conversation history
 router.get("/:sessionId/conversation", protect, getConversation);
+
+// Retake interview (clear conversation, feedback, reset status)
+router.post("/:sessionId/retake", protect, retakeInterview);
 
 module.exports = router;
