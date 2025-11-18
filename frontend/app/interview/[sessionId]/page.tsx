@@ -115,7 +115,7 @@ export default function InterviewPage({
   const { sessionId } = React.use(params);
 
   const API_BASE =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   const getAuthToken = () => {
     if (typeof window !== "undefined")

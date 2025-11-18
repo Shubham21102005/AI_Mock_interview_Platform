@@ -194,7 +194,24 @@ const respondToQuestion = async (req, res) => {
     res.status(200).json({ message: "Next question", question: safeMessage });
   } catch (error) {
     console.error("respondToQuestion error:", error);
-    res.status(500).json({ message: "Server error" });
+
+    // Provide specific error messages based on error type
+    if (error.status === 503 || error.message?.includes('overloaded')) {
+      return res.status(503).json({
+        message: "The AI service is temporarily overloaded. Please try again in a moment.",
+        retryable: true
+      });
+    } else if (error.status === 429) {
+      return res.status(429).json({
+        message: "Rate limit exceeded. Please wait a moment before continuing.",
+        retryable: true
+      });
+    }
+
+    res.status(500).json({
+      message: "Server error. Please try again.",
+      retryable: false
+    });
   }
 };
 

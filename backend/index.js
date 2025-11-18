@@ -18,8 +18,8 @@ app.use((req, res, next) => {
 });
 
 //Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/sessions", sessionRoutes);
+app.use("/auth", authRoutes);
+app.use("/sessions", sessionRoutes);
 
 // 404 handler - log unmatched routes
 app.use((req, res) => {
