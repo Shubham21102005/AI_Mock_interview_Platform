@@ -1,4 +1,4 @@
-import { ParseResult, FileValidation, ParsingStrategy, ProgressCallback, ProcessingProgress } from './types';
+import { ParseResult, FileValidation, ParsingStrategy, ProgressCallback } from './types';
 
 export class PDFParserService {
   private strategies: ParsingStrategy[] = [];

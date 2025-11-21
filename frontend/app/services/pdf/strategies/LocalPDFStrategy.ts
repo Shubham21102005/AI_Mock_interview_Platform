@@ -1,4 +1,4 @@
-import { ParsingStrategy, ProgressCallback, ProcessingProgress } from '../types';
+import { ParsingStrategy, ProgressCallback } from '../types';
 
 export class LocalPDFStrategy implements ParsingStrategy {
   name = 'Local PDF.js Worker';
@@ -78,6 +78,7 @@ export class LocalPDFStrategy implements ParsingStrategy {
                 
                 // Extract text items and join them
                 const pageText = textContent.items
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   .map((item: any) => {
                     // Handle different text item types
                     if (typeof item === 'object' && item.str) {

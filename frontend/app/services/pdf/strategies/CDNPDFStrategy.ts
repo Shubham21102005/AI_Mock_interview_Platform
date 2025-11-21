@@ -1,4 +1,4 @@
-import { ParsingStrategy, ProgressCallback, ProcessingProgress } from '../types';
+import { ParsingStrategy, ProgressCallback } from '../types';
 
 export class CDNPDFStrategy implements ParsingStrategy {
   name = 'CDN PDF.js Worker';
@@ -125,6 +125,7 @@ export class CDNPDFStrategy implements ParsingStrategy {
                 
                 // Extract and clean text
                 const pageText = textContent.items
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   .map((item: any) => {
                     if (typeof item === 'object' && item.str) {
                       return item.str;

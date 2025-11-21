@@ -126,8 +126,8 @@ export default function InterviewPage({
   const getSession = async () => {
     try {
       const data = await apiCall(`/sessions/${sessionId}`);
-      return data as any;
-    } catch (e) {
+      return data;
+    } catch {
       return null;
     }
   };
@@ -171,6 +171,7 @@ export default function InterviewPage({
   const joinedRef = useRef<boolean>(false);
 
   // STT
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
   const listeningRef = useRef<boolean>(false);
 
@@ -217,8 +218,11 @@ export default function InterviewPage({
 
   const initRecognition = () => {
     if (typeof window === "undefined") return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR: any =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).SpeechRecognition ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).webkitSpeechRecognition;
     if (!SR) return null;
     const recog = new SR();
@@ -226,6 +230,7 @@ export default function InterviewPage({
     recog.interimResults = true;
     recog.lang = "en-US";
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recog.onresult = (event: any) => {
       let interimText = "";
       let finalText = finalAnswerRef.current;
@@ -271,6 +276,7 @@ export default function InterviewPage({
       setMicPermissionGranted(true);
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recog.onerror = (event: any) => {
       if (
         event.error === "not-allowed" ||
@@ -303,8 +309,8 @@ export default function InterviewPage({
     setInterim("");
     try {
       recog.start();
-    } catch (err: any) {
-      if (err.name !== "InvalidStateError") {
+    } catch (err) {
+      if (err instanceof Error && err.name !== "InvalidStateError") {
         setError("Could not start microphone. Please check permissions.");
         setMicPermissionGranted(false);
       }
@@ -333,11 +339,11 @@ export default function InterviewPage({
         setConversation((c) => [...c, { role: "assistant", content: q }]);
         speak(q);
       }
-    } catch (e: any) {
+    } catch (e) {
       const session = await getSession();
       if (session && session.status === "in-progress") {
         await loadConversation();
-        const msgs: any[] = (session.conversation || []) as any[];
+        const msgs: Message[] = (session.conversation || []) as Message[];
         const lastAssistant = [...msgs]
           .reverse()
           .find((m) => m.role === "assistant");
@@ -348,7 +354,7 @@ export default function InterviewPage({
         await loadConversation();
         setError("Interview already completed.");
       } else {
-        setError(e?.message || "Failed to start interview");
+        setError(e instanceof Error ? e.message : "Failed to start interview");
       }
     } finally {
       setLoading(false);
@@ -405,8 +411,8 @@ export default function InterviewPage({
         setConversation((c) => [...c, { role: "assistant", content: nextQ }]);
         speak(nextQ);
       }
-    } catch (e: any) {
-      setError(e?.message || "Failed to submit answer");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Failed to submit answer");
       if (joined && !speakingRef.current) {
         setTimeout(() => startListening(), 500);
       }
@@ -443,7 +449,7 @@ export default function InterviewPage({
       await startInterview();
     } else if (session.status === "in-progress") {
       await loadConversation();
-      const msgs: any[] = (session.conversation || []) as any[];
+      const msgs: Message[] = (session.conversation || []) as Message[];
       const lastAssistant = [...msgs]
         .reverse()
         .find((m) => m.role === "assistant");
@@ -485,6 +491,7 @@ export default function InterviewPage({
       if (synth) synth.cancel();
       if (autoSubmitTimerRef.current) clearTimeout(autoSubmitTimerRef.current);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
 
   useEffect(() => {
@@ -672,7 +679,7 @@ export default function InterviewPage({
                       Before you join:
                     </span>
                     <span className="text-[#676f9d]">
-                      You'll need to allow microphone access. Use Chrome or Edge
+                      You&apos;ll need to allow microphone access. Use Chrome or Edge
                       browser for best experience.
                     </span>
                   </div>
@@ -704,7 +711,7 @@ export default function InterviewPage({
                       Waiting for microphone access
                     </span>
                     <span className="text-[#f59e0b]">
-                      Please click "Allow" when your browser asks for permission
+                      Please click &quot;Allow&quot; when your browser asks for permission
                     </span>
                   </div>
                 </div>

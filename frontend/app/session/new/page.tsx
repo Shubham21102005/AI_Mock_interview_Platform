@@ -88,9 +88,9 @@ export default function NewSession() {
   // Parse PDF to text using pdf.js from a CDN (no local worker file required)
   const parsePdfToText = async (file: File): Promise<string> => {
     // Load pdf.js from CDN once
-    const loadPdfJs = (): Promise<any> => {
+    const loadPdfJs = (): Promise<typeof import('pdfjs-dist')> => {
       return new Promise((resolve, reject) => {
-        const w = window as any;
+        const w = window as Window & { pdfjsLib?: typeof import('pdfjs-dist') };
         if (w.pdfjsLib) {
           return resolve(w.pdfjsLib);
         }
@@ -101,14 +101,14 @@ export default function NewSession() {
         script.async = true;
         script.onload = () => {
           try {
-            const lib = (window as any).pdfjsLib;
+            const lib = (window as Window & { pdfjsLib?: typeof import('pdfjs-dist') }).pdfjsLib;
             if (!lib || !lib.GlobalWorkerOptions) {
               reject(new Error("PDF.js failed to load"));
               return;
             }
             lib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.js`;
             resolve(lib);
-          } catch (e) {
+          } catch {
             reject(new Error("PDF.js initialization error"));
           }
         };
@@ -132,6 +132,7 @@ export default function NewSession() {
             const page = await pdf.getPage(pageNum);
             const textContent = await page.getTextContent();
             const pageText = textContent.items
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .map((item: any) => item.str)
               .join(" ");
             fullText += pageText + "\n";
